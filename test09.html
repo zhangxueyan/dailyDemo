@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/init.css">
+  <script src="js/vue.min.js"></script>
+   <style>
+     li{
+      line-height: 40px;
+     }
+     li.active{
+      color: red;
+     }
+   </style>
+</head>
+<body>
+  <div id="app">
+    <p :title="message">{{message}}</p>
+    <ul>
+      <li v-for="item in items" v-on:click="toggleStyle(item)" :class="{active:item.isActive}">{{item.name}}</li>
+    </ul>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        items:[{name:'hello',isActive:false},{name:'world',isActive:false}]
+      },
+      methods:{
+        toggleStyle:function(item){
+          this.items.forEach(function(item){
+             item.isActive = false
+          })
+          item.isActive = true
+        }
+      }
+    })
+  </script>
+</body>
+</html>

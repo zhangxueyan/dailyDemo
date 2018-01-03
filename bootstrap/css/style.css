@@ -1,0 +1,123 @@
+﻿        .clearfix:after{
+          content: "";
+          display: block;
+          clear: both;
+        }
+        body{
+          background:#eeeeee;
+        }
+        .page{
+          min-height: 700px;
+        }
+        .page1{
+          padding: 150px 0 0;
+        }
+        .page1-title p{
+          text-align: center;
+          font-size: 24px;
+          color: #000;
+          line-height: 40px;
+        }
+        .s2-btn{
+          margin-top: 50px;
+        }
+        .s2-btn a {
+          display: block;
+          margin: 0 auto;
+          height: 40px;
+          border: 1px solid #ccc;
+          border-radius: 15px;
+          text-align: center;
+          line-height: 40px;
+        }
+        .s-subt{
+          text-align: center;
+          font-size: 30px;
+          line-height: 60px;
+          color: #2c3e50;
+          letter-spacing: 2px;
+          position: relative;
+        }
+        .s-subt:before{
+          content: "";
+          display: block;
+          width: 70px;
+          height: 4px;
+          background: #E87E04;
+          transition: all 0.5s 0.2s;
+          position: absolute;
+          left: 50%;
+          margin-left: -35px;
+          bottom:0;
+        }
+        .page2-portrait span{
+          display: block;
+          width:150px;
+          height: 150px;
+          margin: 30px auto;
+          border-radius: 50%;
+          background:#ccc;
+        }
+        .page2-txt{
+          text-indent: 2em;
+          line-height: 30px;
+        }
+        .page3-skill{
+          margin-top: 20px;
+          text-align: center;
+        }
+        .page3-skill span{
+          color: #E87E04;
+          line-height: 40px;
+         }
+        .page3-pic{
+          height: 150px;
+          background:#ccc;
+        }
+        .page4-txt{
+          text-indent: 2em;
+          line-height: 30px;
+          margin-top: 30px;
+        }
+        .page4-work span{
+          display: block;
+          height: 200px;
+          background: #ccc;
+          border: 1px solid red;
+          margin-top: 20px;
+        }
+        #uyan_frame{
+          margin-top: 100px;
+        }
+        .page4-p1{
+         color: #626e7c;
+         font-size: 16px;
+        }
+        .page4-p2{
+          color: #E87E04;
+          font-size: 16px;
+        }
+        .page4-cir1{
+          width: 100px;
+          height: 100px;
+          background:#ccc;
+          border-radius: 50%;
+          line-height: 80px;
+          text-align: center;
+        }
+        .page4-content{
+          position: relative;
+        }
+        .page4-content:before{
+          content: "";
+          display: block;
+          width: 1px;
+          height: 100%;
+          background: #ccc;
+          position: absolute;
+          left: 80px;
+          top:0;
+        }
+        .page4-subt{
+          margin-bottom: 20px;
+        }

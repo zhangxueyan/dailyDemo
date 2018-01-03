@@ -1,0 +1,16 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,
+legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+a {text-decoration: none;}
+ul,ol {margin: 0;padding: 0;list-style: none;}
+a,input,button {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+input，textarea{outline:none}  
+-webkit-appearance: none;
+-webkit-user-select: none;
+input,button {-webkit-appearance: none;border-radius: 0;}
+-webkit-touch-callout:none; 
+body {margin: 0;-webkit-user-select: none;}
+body * {font-family: "Microsoft YaHei","Arial";-webkit-user-select: none;box-sizing: border-box;}
+body {-webkit-text-size-adjust: 100%;overflow-x: hidden;}
+-webkit-text-size-adjust: none;
+a img{border:0;}

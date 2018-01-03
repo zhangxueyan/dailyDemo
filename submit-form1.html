@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <form action="">
+      <input type="text" name="loginname" value="请输入姓名">
+      <input type="text" name="loginpasswd" value="请输入密码">
+    </form>
+    <div id="submitBtn">提交数据</div>
+
+<!-- 王涛发的提交表单代码 -->
+<script type="text/javascript">
+        function isTel(indexxx) {
+            if ($("#Orders_Tel"+indexxx).val() == "") {
+                alert("手机号码不能为空！");
+                $("#Orders_Tel"+indexxx).focus();
+                return false;
+            }
+            var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var liua=myreg.test($("#Orders_Tel"+indexxx).val());
+            var liub=$("#Orders_Tel"+indexxx).val().match(/^0[\d]{2,3}-[\d]{7,8}$/);
+            if(!(liua||liub))
+            {
+                alert("手机号码格式不正确！");
+                $("#Orders_Tel"+indexxx).focus();
+                return false;
+            }
+            tijiao(indexxx);
+        }
+        function tijiao(indexxxx){
+            var a=encodeURIComponent($("#Orders_Name"+indexxxx).val());
+            var b=encodeURIComponent($("#Orders_Tel"+indexxxx).val());
+            var c=encodeURIComponent($("#liuschool"+indexxxx).val());
+            var url="http://101.200.85.33:8090/message/msg/save.do";
+            $.ajax({
+                url:url,
+                data:{
+                "liuname":a,
+                "liutel":b,
+                "liuschool":c,
+                "biaoji":encodeURIComponent(window.location.href)},
+                dataType:'JSONP',
+                type:'post',
+                success:function(data){
+                    alert("提交成功");
+                }
+            });
+            alert("提交成功");
+        }
+</script>
+</body>
+</html>

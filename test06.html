@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/init.css">
+  <style>
+    .box{
+      border: 1px solid red;
+      height: 50px;
+      padding: 5px;
+    }
+    #fot-info{
+      height: 40px;
+      overflow: hidden;
+      background: #e2e2e8;
+    }
+    #fot-info li{
+      line-height: 40px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <ul id="fot-info">
+       <li>这里是滚动信息1</li>
+       <li>这里是滚动信息2</li>
+       <li>这里是滚动信息3</li>
+       <li>这里是滚动信息4</li>
+       <li>这里是滚动信息5</li>
+       <li>这里是滚动信息6</li>
+       <li>这里是滚动信息7</li>
+    </ul>
+  </div>
+  <script>
+    var fotInfo = document.getElementById('fot-info');
+    function infoScroll(area){
+      area.innerHTML+=area.innerHTML
+      area.scrollTop=0;
+      function scrollUp(){
+       if(area.scrollTop>=area.scrollHeight/2){
+        area.scrollTop = 0;
+      }
+      else{
+        area.scrollTop++
+      }
+    }
+    var timer = setInterval(scrollUp,20)
+    area.onmouseover = function(){clearInterval(timer);}
+    area.onmouseout = function(){timer=setInterval(scrollUp,20)}
+   }
+   infoScroll(fotInfo)
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/loop-popup.min.js"></script>
+  <style>
+  /*循环弹窗 start*/
+  .popup{
+    width: 700px;
+    height: 360px;
+    position: fixed;
+    left: 50%;
+    margin-left: -350px;
+    top: 50%;
+    margin-top: -180px;
+    z-index: 9999;
+    border: 1px solid red;
+    display: none;
+  }
+  .popup-close{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid red;
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+  }
+/*循环弹窗 ending*/
+</style>
+</head>
+<body>
+  <!-- 循环弹窗 start -->
+  <div class="popups">
+   <div class="popup popup1">1
+     <span class="popup-close popup-close1">X</span>
+   </div>
+   <div class="popup popup2">2
+     <span class="popup-close popup-close2">X</span>
+   </div>
+   <div class="popup popup3">3
+     <span class="popup-close popup-close3">X</span>
+   </div>
+ </div>
+ <!-- 循环弹窗 ending -->
+
+ <script>
+    //pop-tc
+    var $popup1 = $('.popup1');
+    var $popup2 = $('.popup2');
+    var $popup3 = $('.popup3');
+    $('#element').showPopup($popup1,300);  
+    $(".popup-close1").click(function(){
+      $('#element').hidePopup($popup1);
+      $('#element').showPopup($popup2,100);
+    })
+    $(".popup-close2").click(function(){
+      $('#element').hidePopup($popup2);
+      $('#element').showPopup($popup3,100);
+    })
+    $(".popup-close3").click(function(){
+      $('#element').hidePopup($popup3);
+    })
+
+  </script>
+</body>
+</html>

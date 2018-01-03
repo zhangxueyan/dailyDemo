@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/init.css">
+  <script src="js/vue.min.js"></script>
+  <script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+  <div id="div">ddd</div>
+ <script>
+   $(function(){
+      $.ajax({
+        type: "GET",
+        url:"https://zhangxueyan.github.io/private/test.txt",
+        // data: {username:$("#username").val(), content:$("#content").val()},
+        // dataType: "json",
+        success:function(result){
+         var data = JSON.parse(result);
+         console.log(data)
+         data.studends.forEach(function(item){
+          console.log(item.firstName)
+         })
+        }
+       });
+   })
+ </script>
+</body>
+</html>

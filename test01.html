@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+  姓名:<input type="text" name="姓名" value=" ">
+  邮箱:<input type="text" name="邮箱" value=" ">
+  密码:<input type="text" name="密码" value=" ">
+  <button id="btn" onclick="CheckObject()">点击提交</button>
+<script>
+
+  // var CheckObject={
+  //   checkName:function(){
+  //     var name=document.getElementsByName("姓名")[0].value;
+  //     console.log(name);
+  //     var reg=/^([\u4e00-\u9fa5]){2,7}$/;
+  //     if(!reg.test(name)){
+  //       alert("请输入正确的姓名");
+  //     }
+  //   },
+  //   checkEmail:function(){
+  //     var email= document.getElementsByName("邮箱")[0].value;
+  //     console.log(email);
+  //     var reg = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+  //      if(!reg.test(email)){
+  //       alert("请输入正确的邮箱");
+  //     }
+  //   },
+  //   checkPassword:function(){
+  //     var password= document.getElementsByName("密码")[0].value;
+  //     console.log(password);
+  //     var reg = /^[a-zA-Z]\w{5,17}$/;
+  //      if(!reg.test(password)){
+  //       alert("请输入正确的密码");
+  //     }
+  //   }
+  // }
+  function CheckObject(){
+    var name=document.getElementsByName("姓名")[0].value;
+     var email= document.getElementsByName("邮箱")[0].value;
+     var password= document.getElementsByName("密码")[0].value;
+     var namereg=/^([\u4e00-\u9fa5]){2,7}$/;
+     if(!namereg.test(name)){
+      alert("请输入正确的姓名");
+     }
+    var emailreg = /^[A-Za-z\d]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+    if(!emailreg.test(email)){
+      alert("请输入正确的邮箱");
+     }
+      var psdreg = /^[a-zA-Z]\w{5,17}$/;
+       if(!psdreg.test(password)){
+        alert("请输入正确的密码");
+      }
+  }
+</script>
+</body>
+</html>

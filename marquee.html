@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <style>
+/*滚动信息css start*/
+#demo {
+  width: 500px;
+  height: 280px;
+  margin:0 auto;
+  overflow:hidden;
+  margin-top: 20px;
+  border: 1px solid red;
+}
+#indemo {
+  height: 600px;
+}
+#demo p {
+  font-size: 18px;
+  line-height: 36px;
+}
+/*滚动信息css ending*/
+  </style>
+</head>
+<body>
+  <div id="demo">
+    <div id="indemo">
+      <div id="demo1">
+         <p>2017年自考学历备考指南</p>
+         <p>关于2017年自考学历报名通告</p>
+         <p>关于2017年自考学历奖章</p>
+         <p>关于自考学历考试面试管理方法</p>
+         <p>关于2016年自考学历成绩查询网站</p>
+      </div>
+      <div id="demo2"></div>
+    </div>
+  </div>
+  <script>
+        var speed=30;//鎺у埗閫熷害
+        var tab=document.getElementById("demo");
+        var tab1=document.getElementById("demo1");
+        var tab2=document.getElementById("demo2");
+        tab2.innerHTML=tab1.innerHTML;
+        function Marquee(){
+            if(tab2.offsetHeight-tab.scrollTop<=0)
+                tab.scrollTop-=tab1.offsetHeight;
+            else{
+                tab.scrollTop++;
+            }
+        }
+        //瀹氭椂鍣�
+        var MyMar=setInterval(Marquee,speed);
+        //榧犳爣婊戣繃鍋滄婊氬姩
+        tab.onmouseover=function() {clearInterval(MyMar)};
+        //榧犳爣婊戝嚭缁х画婊氬姩
+        tab.onmouseout=function() {MyMar=setInterval(Marquee,speed)}; 
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/mock.js"></script>
+</head>
+<body>
+  <script>
+    //模拟后台
+    Mock.mock('http://api.com', {
+    	"nav|10": [{
+            'cate': 'xiaomi',
+             isShow:false,
+             cateChild:[
+                 {
+                   'isNew': true, 
+                   'name': 'xmMIX2', 
+                   'price': 3299  
+                 },
+                 {
+                   'isNew': true, 
+                   'name': 'xmMIX2', 
+                   'price': 3299  
+                 },              
+                 {
+                   'isNew': true, 
+                   'name': 'xmMIX2', 
+                   'price': 3299  
+                 }
+            ]
+        }]
+    });
+
+    //JQuery方式
+    // $.ajax({
+    //     url: 'http://api.com',
+    //     dataType: 'json'
+    // }).done(function(data, status, xhr) {
+    //     console.log(JSON.stringify(data, null, 4))
+    // });
+    $.ajax({
+      url: 'http://api.com',
+      dataType: 'json'
+    }).done(function(data) {
+      console.log(JSON.stringify(data,null,4))
+    });
+</script>
+</body>
+</html>
