@@ -34,36 +34,33 @@
     </ul>
   </div>
   <script>
-    var fotInfo = document.getElementById('fot-info');
-    function infoScroll(area,lineheight){
-      area.innerHTML+= area.innerHTML;
-      area.scrollTop=0;
-      var timer=null,timeout=null;
-      function startMove(){
-       timer = setInterval(scrollUp,20)
-       area.scrollTop++
+    //间歇性滚动
+    var fotInfo = document.getElementById("fot-info");
+    function scrollInfo(area,lineheight){
+     area.innerHTML+=area.innerHTML;
+     var timer=null,timeout=null;
+     area.scrollTop = 0;
+     function startMove(){
+      timer = setInterval(scrollUp,20)
+      area.scrollTop++
      }
      function scrollUp(){
       if(area.scrollTop%lineheight===0){
-        clearInterval(timer);
-        timeout = setTimeout(startMove,500);
-      }else{
+        clearInterval(timer)
+        timeout = setTimeout(startMove,500)
+      }
+      else{
         area.scrollTop++
         if(area.scrollTop>=area.scrollHeight/2){
           area.scrollTop = 0;
         }
       }
+     }
+     timeout = setTimeout(startMove,500)
+     area.onmouseover = function(){clearInterval(timer),clearTimeout(timeout)}
+     area.onmouseout = function(){timer=setInterval(scrollUp,20)}
     }
-    timeout = setTimeout(startMove,500);
-    area.onmouseover = function(){
-      clearInterval(timer);
-      clearTimeout(timeout);
-    }
-    area.onmouseout = function(){timer=setInterval(scrollUp,20)}
-  }
-   infoScroll(fotInfo,40)
-
-  // 滚动1px所需要的时间
+    scrollInfo(fotInfo,40)
   </script>
 </body>
 </html>

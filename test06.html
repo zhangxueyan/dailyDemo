@@ -35,22 +35,22 @@
   </div>
   <script>
     var fotInfo = document.getElementById('fot-info');
-    function infoScroll(area){
+    function scrollInfo(area){
       area.innerHTML+=area.innerHTML
       area.scrollTop=0;
       function scrollUp(){
-       if(area.scrollTop>=area.scrollHeight/2){
-        area.scrollTop = 0;
+        if(area.scrollTop>=area.scrollHeight/2){
+          area.scrollTop=0;
+        }
+        else{
+          area.scrollTop++
+        }
       }
-      else{
-        area.scrollTop++
-      }
+      var timer = setInterval(scrollUp,20);
+       area.onmouseover = function(){clearInterval(timer)}
+       area.onmouseout = function(){timer=setInterval(scrollUp,20)}
     }
-    var timer = setInterval(scrollUp,20)
-    area.onmouseover = function(){clearInterval(timer);}
-    area.onmouseout = function(){timer=setInterval(scrollUp,20)}
-   }
-   infoScroll(fotInfo)
+    scrollInfo(fotInfo)
   </script>
 </body>
 </html>

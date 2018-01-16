@@ -16,27 +16,29 @@
 </head>
 <body>
   <div id="app">
-    <p :title="message">{{message}}</p>
-    <ul>
-      <li v-for="item in items" v-on:click="toggleStyle(item)" :class="{active:item.isActive}">{{item.name}}</li>
-    </ul>
+    <p>{{a}}</p>
+    <button @click="add">按钮</button>
+    <p>{{aDouble}}</p>
   </div>
   <script>
-    var app = new Vue({
+    var vm = new Vue({
       el: '#app',
       data: {
-        message: 'Hello Vue!',
-        items:[{name:'hello',isActive:false},{name:'world',isActive:false}]
+        message:"hello world",
+        a:1
+      },
+      computed:{
+        aDouble:function(){
+          return this.a*2
+        }
       },
       methods:{
-        toggleStyle:function(item){
-          this.items.forEach(function(item){
-             item.isActive = false
-          })
-          item.isActive = true
+        add:function(){
+          this.a++
         }
       }
     })
+    console.log(vm)
   </script>
 </body>
 </html>

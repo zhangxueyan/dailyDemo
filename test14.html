@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>倒计时效果</title>
+</head>
+<body>
+  <p>本次报名剩余
+    <span id="t-d"></span>天
+    <span id="t-h"></span>时
+    <span id="t-m"></span>分
+    <span id="t-s"></span>秒
+  </p>
+  <script>
+    var obj = {
+      myFun:function(){
+       function showCountDown(){
+          var NowTime = new Date();
+          var EndTime = new Date("2018/01/17 18:00:00");
+          var t = EndTime.getTime()-NowTime.getTime()
+          var d=0,h=0,m=0,s=0;
+          if(t>0){
+            d=Math.floor(t/1000/60/60/24)
+            h=Math.floor(t/1000/60/60%24)
+            m=Math.floor(t/1000/60%60)
+            s=Math.floor(t/1000%60)
+           }
+           document.getElementById('t-d').innerHTML =  d
+           document.getElementById('t-h').innerHTML =  h
+           document.getElementById('t-m').innerHTML =  m
+           document.getElementById('t-s').innerHTML =  s
+        }
+       setInterval(showCountDown,1000)
+      }
+    }
+    obj.myFun()
+
+  </script>
+</body>
+</html>
