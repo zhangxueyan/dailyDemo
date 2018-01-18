@@ -5,36 +5,53 @@
   <title>倒计时效果</title>
 </head>
 <body>
-  <p>本次报名剩余
-    <span id="t-d"></span>天
-    <span id="t-h"></span>时
-    <span id="t-m"></span>分
-    <span id="t-s"></span>秒
-  </p>
+  <p id="time"></p>
   <script>
     var obj = {
-      myFun:function(){
-       function showCountDown(){
-          var NowTime = new Date();
-          var EndTime = new Date("2018/01/17 18:00:00");
+      showCountDown:function(){
+       function countDown(){
+          var NowTime = new Date(),
+              getDay = NowTime.getDay(),
+              getDate = NowTime.getDate(),
+              EndTime = new Date("2018/01/16 23:59:00");
+              switch(getDay){
+                case 0:EndTime.setDate(getDate+3);
+                break;
+                case 1:EndTime.setDate(getDate+2)
+                break;
+                case 2:EndTime.setDate(getDate+1)
+                break;
+                case 3:EndTime.setDate(getDate+2)
+                break;
+                case 4:EndTime.setDate(getDate+1)
+                break;
+                case 5:EndTime.setDate(getDate+2)
+                break;
+                case 6:EndTime.setDate(getDate+1)
+                break;
+              }
           var t = EndTime.getTime()-NowTime.getTime()
           var d=0,h=0,m=0,s=0;
-          if(t>0){
-            d=Math.floor(t/1000/60/60/24)
-            h=Math.floor(t/1000/60/60%24)
-            m=Math.floor(t/1000/60%60)
-            s=Math.floor(t/1000%60)
-           }
-           document.getElementById('t-d').innerHTML =  d
-           document.getElementById('t-h').innerHTML =  h
-           document.getElementById('t-m').innerHTML =  m
-           document.getElementById('t-s').innerHTML =  s
+          d=Math.floor(t/1000/60/60/24);
+          h=Math.floor(t/1000/60/60%24);
+          m=Math.floor(t/1000/60%60);
+          s=Math.floor(t/1000%60);
+          function checkTime(i){
+            if(i<10){
+              i = "0"+ i;
+            }
+            return i;
+          }
+          d = checkTime(d);
+          h = checkTime(h);
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('time').innerHTML = "本次报名剩余" + d + "天" + h + "时"+ m + "分"+ s + "秒";
         }
-       setInterval(showCountDown,1000)
+       setInterval(countDown,1000)
       }
     }
-    obj.myFun()
-
+    obj.showCountDown();
   </script>
 </body>
 </html>
