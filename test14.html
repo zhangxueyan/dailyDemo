@@ -5,37 +5,48 @@
   <title>倒计时效果</title>
 </head>
 <body>
-  <p id="time"></p>
+  <p class="ban-end">本批次剩余
+    <span id="t_d"></span>天
+    <span id="t_h"></span>时
+    <span id="t_m"></span>分
+    <span id="t_s"></span>秒
+    <span id="t_ms"></span>截止</p>
   <script>
     var obj = {
       showCountDown:function(){
        function countDown(){
-          var NowTime = new Date(),
-              getDay = NowTime.getDay(),
-              getDate = NowTime.getDate(),
-              EndTime = new Date("2018/01/16 23:59:00");
+          var NowDate = new Date(),
+              getDate = NowDate.getDate(),
+              getDay = NowDate.getDay(),
+              EndDate = new Date();
               switch(getDay){
-                case 0:EndTime.setDate(getDate+3);
+                case 0:EndDate.setDate(getDate+3);
                 break;
-                case 1:EndTime.setDate(getDate+2)
+                case 1:EndDate.setDate(getDate+2)
                 break;
-                case 2:EndTime.setDate(getDate+1)
+                case 2:EndDate.setDate(getDate+1)
+                break; 
+                case 3:EndDate.setDate(getDate+2)
                 break;
-                case 3:EndTime.setDate(getDate+2)
+                case 4:EndDate.setDate(getDate+1)
                 break;
-                case 4:EndTime.setDate(getDate+1)
+                case 5:EndDate.setDate(getDate+2)
                 break;
-                case 5:EndTime.setDate(getDate+2)
-                break;
-                case 6:EndTime.setDate(getDate+1)
+                case 6:EndDate.setDate(getDate+1)
                 break;
               }
-          var t = EndTime.getTime()-NowTime.getTime()
+          var EndDate = new Date(EndDate)
+          EndDate.setHours(23)
+          EndDate.setMinutes(59)
+          EndDate.setSeconds(00)
+          EndDate.setMilliseconds(00)
+          var t = EndDate.getTime()-NowDate.getTime();
           var d=0,h=0,m=0,s=0;
           d=Math.floor(t/1000/60/60/24);
           h=Math.floor(t/1000/60/60%24);
           m=Math.floor(t/1000/60%60);
           s=Math.floor(t/1000%60);
+          ms=Math.floor(t%60);
           function checkTime(i){
             if(i<10){
               i = "0"+ i;
@@ -46,9 +57,14 @@
           h = checkTime(h);
           m = checkTime(m);
           s = checkTime(s);
-          document.getElementById('time').innerHTML = "本次报名剩余" + d + "天" + h + "时"+ m + "分"+ s + "秒";
+          ms = checkTime(ms);
+          document.getElementById("t_d").innerHTML = d;
+          document.getElementById("t_h").innerHTML = h;
+          document.getElementById("t_m").innerHTML = m;
+          document.getElementById("t_s").innerHTML = s;
+          document.getElementById("t_ms").innerHTML = ms;
         }
-       setInterval(countDown,1000)
+       setInterval(countDown,100)
       }
     }
     obj.showCountDown();

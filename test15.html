@@ -3,18 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+      #div1{
+      	border: 1px solid red;
+      }
+	</style>
 </head>
 <body>
+	<div id="div1">dddd</div>
+	<script>
+      var para = document.createElement("p");
+      var node = document.createTextNode("hello");
+      para.appendChild(node);
 
-<script>
-  var s1 = "some text";
-  s1.color = "red";
-  alert(s1.color)
-
-
-  var obj = new Object("some test");
-  
-
-</script>
+      var el = document.getElementById("div1");
+      el.appendChild(para)
+	</script>
 </body>
 </html>
