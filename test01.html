@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p id="box">hello world</p>
+ <script>
+ 	
+    // var NameSpace = {
+    //   name:"coco",
+    //   sayHello:function(){
+    //     alert("hello")
+    //   }
+    // }
+    // NameSpace.sayHello()
+    // console.log(NameSpace.name)
+
+
+    (function(win){
+      var doc = win.document;
+      var name = "coco";
+      console.log(name)
+    }(window))
+
+    console.log(typeof(name))
+
+
+ </script>
+</body>
+</html>
