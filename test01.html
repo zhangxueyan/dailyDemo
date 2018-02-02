@@ -5,28 +5,24 @@
 	<title>Document</title>
 </head>
 <body>
-	<p id="box">hello world</p>
- <script>
- 	
-    // var NameSpace = {
-    //   name:"coco",
-    //   sayHello:function(){
-    //     alert("hello")
-    //   }
-    // }
-    // NameSpace.sayHello()
-    // console.log(NameSpace.name)
+	<script>
+		var arr= [];
+		function getArray(){
+			for(var i = 0;i<10;i++){
+				arr.push(i)
+			}
+			return arr;
+		}
+		getArray();
+        var i = 0;
+        var timer = setInterval(function(){
+        	console.log(arr[i]);
+        	i++;
+        	if(i > arr.length-1){
+        		clearInterval(timer);
+        	}
+        },1000);
 
-
-    (function(win){
-      var doc = win.document;
-      var name = "coco";
-      console.log(name)
-    }(window))
-
-    console.log(typeof(name))
-
-
- </script>
+	</script>
 </body>
 </html>
