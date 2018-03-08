@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/init.css">
+	<script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<ul>
+		<li class="item">dddd</li>
+		<li class="item">dddd</li>
+	</ul>
+	<button id="btn">点击停止</button>
+	<script>
+		// jQuery对象
+		var $li = $(".item")
+		console.log($li);
+
+       // Dom对象
+		var li = document.querySelectorAll(".item");
+		console.log(li);
+
+
+		//打点计时器  start end 每隔1000ms 输出 返回对象包含停止的方法 且 start立即输出
+		function timer(start,end){
+			console.log(start)
+			var start2 = start+1;
+			var t = setInterval(function(){
+				if(start2<=end){
+					console.log(start2++)
+				}
+			},1000)
+			var obj = {
+				name:"coco",
+				stop:function(){
+					console.log("停止")
+					clearInterval(t)
+				}
+			}
+			return obj;
+		}
+		var aa = timer(1,5);
+		var btn = document.getElementById('btn');
+		btn.addEventListener("click",function(){
+			aa.stop()
+		},false)
+	</script>
+
+</body>
+</html>
