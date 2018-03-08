@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+	 li{
+	 	cursor: pointer;
+	 	line-height: 50px;
+	 }
+	 .active{
+	 	color: red;
+	 }
+	 .text-danger{
+	 	font-size: 50px;
+	 	font-weight: bold;
+	 }
+	</style>
+</head>
+<body>
+	<div id="app">
+
+		 <p ref="coco">{{a}}</p>
+
+         <p>{{aDouble}}</p>
+
+         <p>{{aPlus}}</p>
+
+         <img :src="imageSrc" alt="" width="100">
+	</div>
+	<script>
+		var vm = new Vue({
+			el:"#app",
+			data:{
+			 a:1,
+			 b:2,
+			 c:{
+			 	name:"coco",
+			 	age:25
+			 },
+			 imageSrc:'images/4.jpg'
+			},
+			computed:{
+				aDouble:function(){
+					return this.a *2
+				},
+				aPlus:{
+					get:function(){
+						return this.a+1
+					},
+					set: function (v) {
+						this.a = v - 1
+					}
+				}
+			},
+			methods:{
+				plus:function(){
+					 this.a++
+				}
+			}
+		})
+		vm.$watch('b',function(newVal,oldVal){
+			console.log(newVal)
+			console.log(oldVal)
+		})
+
+		vm.$watch('c',function(newVal){
+			console.log(newVal)
+		},{deep:true})
+
+		vm.c.name="zhangxueyan"
+
+		Vue.set(vm.c,'name','lujialin')
+
+		vm.$set(vm.c,'name','lujiajia')
+
+		vm.$delete(vm.c,'age')
+		Vue.delete(vm.c,'age')
+
+		vm.$on('test',function(msg){
+			console.log(msg)
+		})
+		vm.$emit('test', 'hi')
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script> 
+	function filter(content) {
+	 var result = '';
+     // 预先设置的敏感词
+     var minWords = ["习近平", "周永康", "中共", "6.4"];
+     for (let i = 0; i < content.length; i++) {
+    	var reg = new RegExp(minWords[i], "ig");
+    	result = content.replace(reg, "");
+     }
+     return result;
+    }
+    var content = "习近平是中国主席"
+    console.log(filter(content))
+	</script>
+</body>
+</html>
