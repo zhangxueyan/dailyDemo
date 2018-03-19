@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+  table{
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+  }
+  td{
+    border: 1px solid #ccc;
+  }
+</style>
+</head>
+<body>
+  <div id="app">
+
+    <table>
+      <tr v-for="item in items">
+        <td v-for="childItem in item.childItems">{{childItem}}</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr is="my-row"></tr>
+    </table>
+
+     <ul>
+       <li is="my-li"></li>
+     </ul>
+
+    <p>{{counter}}</p>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+
+    <br>
+    <br>
+    <p v-for="message in messages">{{message}}</p>
+    <button-message v-on:message = "handleMessage"></button-message>
+
+    <my-component>
+      <template slot-scope="props">
+        <span>hello from parent</span>
+        <span>{{ props }}</span>
+      </template>
+    </my-component>
+  </div>
+  <script>
+    var myComponent = {
+       template:"<div>myComponent hello<slot img='hello slot new'></slot></div>"
+    }
+
+    var buttonMessage = {
+      template:"<div><input type='text' value='hello' v-model='message'/><button @click='handleSendMessage'>send</button></div>",
+      data:function(){
+        return {
+          message:"child",
+          aa:"test"
+        }
+      },
+      methods:{
+        handleSendMessage:function(){
+          this.$emit("message",{message:this.message})
+        }
+      }
+    }
+
+    var buttonCounter = {
+      template:"<button @click='incrementCounter'>{{counter}}</button>",
+      data:function(){
+        return {
+          counter:0
+        }
+      },
+      methods:{
+        incrementCounter:function(){
+          this.counter++;
+          this.$emit("increment")
+        }
+      }
+    }
+
+    var myLi = {
+      template:"<li>{{items}}</li>",
+      data:function(){
+        return {
+          message:"lulinlin",
+          items:["AA","BB","CC"]
+        }
+      }
+    }
+
+    var myRow = {
+      template:"<tr v-for='item in items'><td v-for='childItem in item.childItems'>{{childItem}}</td></tr>",
+      data:function(){
+        return {
+          items:[
+          {childItems:["1a","1b","1c"]},
+          {childItems:["1a","1b","2c"]}
+          ]
+        }
+      }
+    }
+
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        messages:[],
+        items:[
+        {childItems:["1a","1b","1c"]},
+        {childItems:["1a","1b","2c"]}
+        ],
+        names:["AA","BB","CC"],
+        counter:0
+      },
+      components:{
+        myRow,myLi,buttonCounter,buttonMessage,myComponent
+      },
+      methods:{
+        incrementTotal:function(){
+          this.counter++
+        },
+        handleMessage:function(paload){
+         console.log(paload)
+         this.messages.push(paload.message)
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

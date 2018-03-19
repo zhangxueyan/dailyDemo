@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+</head>
+<body>
+<script type="text/template">  
+hello world
+</script> 
+<script>
+var a = {n:1};
+var b = a;
+a.x = a = {n:2};
+console.log(b.x);//{n:2}
+</script>
+
+</body>
+</html>

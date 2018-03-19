@@ -1,23 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        *{
+        font-size: 22px;
+        color: #000;
+        }
+    </style>
 </head>
 <body>
-	<script> 
-	function filter(content) {
-	 var result = '';
-     // 预先设置的敏感词
-     var minWords = ["习近平", "周永康", "中共", "6.4"];
-     for (let i = 0; i < content.length; i++) {
-    	var reg = new RegExp(minWords[i], "ig");
-    	result = content.replace(reg, "");
-     }
-     return result;
-    }
-    var content = "习近平是中国主席"
-    console.log(filter(content))
-	</script>
+    <div id="app">
+      <p>{{total}}</p>
+      <button-counter v-on:increment="incrementTotal()"></button-counter>
+      <button-counter v-on:increment="incrementTotal()"></button-counter>
+      <br>
+      <br>
+      <!--*****************-->
+      <p v-for="message in messages">{{message}}</p>
+      <button-message v-on:message="handleMessage" @click="doTheThing"></button-message>
+      <br>
+      <br>
+      <!--*****************-->
+      
+
+      <input type="text" v-model="aa">
+      <p>{{aa}}</p>
+
+
+     <child :foo="baz" :bar="qux">
+        <span>hello from parent</span><br>
+        <span slot-scope="obj">{{obj}}</span>
+     </child>
+
+
+
+    </div>
+    <script>
+
+        var buttonCounter = {
+            template:"<button @click='increment()'>{{counter}}</button>",
+            data:function(){
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                increment:function(){
+                  this.counter++
+                  this.$emit('increment')
+                }
+            }
+        }
+        var buttonMessage={
+            template:"<div> <input type='text' v-model='message'> <button @click='handleSendMessage()'>send</button></div>",
+            data:function(){
+                return {
+                     message:'test message'
+                }
+            },
+            methods:{
+                handleSendMessage:function(){
+                   this.$emit('message', { message: this.message })
+                }
+            }
+        }
+
+        var child = {
+          template:"<div class='child'><slot age='28' names='coco'></slot></div>"
+        }
+
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                messages:[],
+                total:0,
+                aa:25
+            },
+            components:{
+                buttonCounter,
+                buttonMessage,
+                child
+            },
+            methods:{
+                incrementTotal:function(){
+                    this.total++
+                },
+                handleMessage:function(payload){
+                    this.messages.push(payload.message)
+                },
+                doTheThing:function(){
+                    alert("ok")
+                }
+            }
+        })
+    </script>
 </body>
 </html>
