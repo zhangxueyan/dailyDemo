@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/init.css">
 	<style>
 	 li{
 	 	cursor: pointer;
@@ -17,9 +17,41 @@
 	 	font-size: 50px;
 	 	font-weight: bold;
 	 }
+	 .s1{
+	 	width: 1000px;
+	 	margin: 0 auto;
+	 	border: 1px solid #000;
+	 }
+	 .s1-h1{
+	 	margin-top: 10px;
+	 	position: relative;
+	 }
+
+	 .div1,.div2{
+	 	width: 400px;
+	 	border: 2px solid red;
+	 		 	height: 400px;
+	 		 	text-align: center;
+	 		 	line-height: 400px;
+	 }
+	 .div1{
+	 	float: left;
+	 }
+	 .div2{
+	 	float: right;
+	 }
+	 .clearfix{
+	 	clear: both;
+	 }
 	</style>
 </head>
 <body>
+
+	<div class="s1">
+		<div class="div1">AAAAAAAAAA</div>
+		<div class="div2">BBBBBBBBBB</div>
+		<div class="clearfix"></div>
+	</div>
 	<div id="app">
 
 		 <p ref="coco">{{a}}</p>

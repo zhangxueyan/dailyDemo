@@ -1,245 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>计算器</title>
-  <link rel="stylesheet" href="css/init.css">
-<style type="text/css">
-        .calculator {
-            width: 326px;
-            height: 460px;
-            margin: 80px auto;
-            background-color: #368590;
-            border-radius: 5px;
-        }
-
-        .calculator .c_screen {
-            position: relative;
-            width: 326px;
-            height: 110px;
-            background-color: #96a4c2;
-            border-radius: 5px;
-        }
-
-        .calculator .c_screen > p {
-            width: 100%;
-            position: absolute;
-            top: 50%;
-            margin-top: -20px;
-            text-align: center;
-            word-break: break-all;
-            color: #fff;
-            font-size: 20px;
-            font-weight: bold;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border: 1px solid red;
-        }
-
-        .calculator .c_row {
-            margin: 0 23px;
-        }
-
-        button {
-            cursor: pointer;
-            width: 60px;
-            height: 45px;
-            margin: 20px 2px 0;
-            border: 0px;
-            border-radius: 5px;
-            color: #fff;
-            background-color: #2b2f5b;
-            outline: none;
-        }
-
-        button::selection {
-            color: #fff;
-        }
-
-        button:active {
-            box-shadow: 0 0 5px 5px dodgerblue;
-        }
-
-        .c_func_btn {
-            background: linear-gradient(to bottom, rgba(252, 156, 23, 1) 0%, rgba(247, 126, 27, 1) 100%);
-        }
-        .d{
-            width: 60px;
-            height: 110px;
-            float: right;
-            position: relative;
-            bottom:66px;
-            right:32px;
-        }
-        .z{
-            width: 129px;
-            height: 45px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    table{
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        width: 500px;
+        margin: 0 auto;
+    }
+    td{
+       border: 1px solid #ccc; 
+       text-align: center;
+       line-height: 40px;
+       width: 125px;
+    }
+    input{
+        width: 100%;
+        display: block;
+        line-height: 40px;
+        border:none;
+        text-align: right;
+        padding-right: 20px;
+    }
+</style>
 </head>
 <body>
-<div class="calculator">
-    <div class="c_screen">
-        <p></p>
-    </div>
-    <div class="c_btn_wrapper">
-        <div class="c_row">
-            <button class="c_func_btn">/</button>
-            <button class="c_func_btn">*</button>
-            <button class="c_func_btn">CE</button>
-            <button class="c_func_btn">AC</button>
-        </div>
-        <div class="c_row">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="c_func_btn">+</button>
-        </div>
-        <div class="c_row">
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button class="c_func_btn">-</button>
-        </div>
-        <div class="c_row">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-        </div>
-        <button class="c_func_btn d">=</button>
-        <div class="c_row">
-            <button class="z">0</button>
-            <button>.</button>
-        </div>
-    </div>
-</div>
-<script>
-    var btnList = document.getElementsByTagName('button');
-    var show = document.getElementsByTagName('p')[0];
+    <table>
+        <tbody>
+           <tr>
+               <td colspan="5">
+                   <input type="text" value="0" name="showResult">
+               </td>
+            </tr>
+            <tr>
+                <td><button>7</button></td>
+                <td><button>8</button></td>
+                <td><button>9</button></td>
+                <td><button class="setChange" id="backSpace">退格</button></td>
+                <td><button class="setChange" id="clearNum">C</button></td>
+            </tr>
+            <tr>
+                <td><button>4</button></td>
+                <td><button>5</button></td>
+                <td><button>6</button></td>
+                <td><button>+</button></td>
+                <td><button>-</button></td>
+            </tr>
+            <tr>
+                <td><button>1</button></td>
+                <td><button>2</button></td>
+                <td><button>3</button></td>
+                <td><button>*</button></td>
+                <td><button>/</button></td>
+            </tr>
+            <tr>
+                <td><button>0</button></td>
+                <td><button>.</button></td>
+                <td><button>%</button></td>
+                <td colspan="2"><button class="setChange" id="gainResult">Enter</button></td>
+            </tr> 
+        </tbody>
+    </table>
 
-    var symbolB = false;
-    //记录符号
-    var symbol = null;
-    //记录a值，b值,记录结果,保存计算结果
-    var aNum = 0, bNum = 0, result = 0, resultCookic = 0;
 
-    for (var i = 0, len = btnList.length; i < len; i++) {
-
-        btnList[i].onclick = function () {
-
-            //结果
-            if (this.innerText == '=') {
-                console.log(aNum , bNum);
-
-                if (symbol == '+') {
-                    addition(aNum, bNum);
-                } else if (symbol == '-') {
-                    subtraction(aNum, bNum);
-
-                } else if (symbol == '*') {
-                    multiplication(aNum, bNum);
-
-                } else if (symbol == '/') {
-                    division(aNum, bNum);
-                }
-                console.log(result);
-                resultCookic = result;
-                result = 0;
-                aNum = 0;
-                bNum = 0;
-                symbolB = false;
-
-            }else{
-                //初始化和归零
-                if (this.innerText == 'AC') {
-                    //初始化所有值
-                    result = 0;
-                    resultCookic = 0;
-                    aNum = 0;
-                    bNum = 0;
-                    show.innerText = "";
-                    return;
-                } else if (this.innerText == 'CE') {
-                    //初始化所有值
-                    result = 0;
-                    resultCookic = 0;
-                    aNum = 0;
-                    bNum = 0;
-                    show.innerText = result;
-                    return;
-                } else if ( this.innerText == '+' ||
-                            this.innerText == '-' ||
-                            this.innerText == '*' ||
-                            this.innerText == '/'
-                ) {
-                    //如果点击了符号按钮，那么之后输入的值就是b值
-                    //记录符号
-                    symbol = this.innerText;
-                    show.innerText = symbol;
-                    symbolB = true;
-                } else {
-                    if (symbolB == false) {
-                        aNum += this.innerText;
-                        aNum = Number(aNum);
-                        console.log(aNum);
-                        show.innerText = aNum;
-                    } else {
-                        //如果计算完一次结果，再次点击符号按钮进行计算，就把上一次的计算结果赋值给a
-                        if(aNum == 0 ){
-                            aNum = resultCookic;
-                        }
-                        bNum += this.innerText;
-                        bNum = Number(bNum);
-                        console.log(bNum);
-                        show.innerText = bNum;
-                    }
-                }
+    <script>
+        var oinput=document.getElementsByTagName('input')[0];
+        //获取外部样式
+        function getStyle(obj, name)
+        {
+            if(obj.currentStyle)
+            {
+                return obj.currentStyle[name];
+            }
+            else
+            {
+                return getComputedStyle(obj, false)[name];
             }
         }
-    }
-
-
-    /**
-     * 加法
-     * @param a{number}
-     * @param b{number}
-     */
-    function addition(a, b) {
-        result = a + b;
-        show.innerText = result;
-    }
-
-    /**
-     * 减法
-     * @param a{number}
-     * @param b{number}
-     */
-    function subtraction(a, b) {
-        result = a - b;
-        show.innerText = result;
-    }
-
-    /**
-     * 乘法
-     * @param a{number}
-     * @param b{number}
-     */
-    function multiplication(a, b) {
-        result = a * b;
-        show.innerText = result;
-    }
-
-    /**
-     * 除法
-     * @param a{number}
-     * @param b{number}
-     */
-    function division(a, b) {
-        result = a / b;
-        show.innerText = result;
-    }
-
-</script>
+        //渐变动画
+        function move(obj,attr,tar){
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function(){
+                var cur=parseInt(getStyle(obj,attr));
+                var itarget=parseInt(tar);
+                var speed=(itarget-cur)/6;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                obj.style[attr]=parseInt(getStyle(obj,attr))+speed+'px';
+                if(speed==0){
+                    clearInterval(obj.timer);
+                }
+            },30);
+        }
+        //事件绑定函数
+        function addEvent(obj,ev,fun){
+            if(obj.attachEvent){
+                obj.attachEvent('on'+ev,fun);
+            }else{
+                obj.addEventListener(ev,fun,false);
+            }
+        }
+        //阻止默认行为
+        function stopEvent(ev){
+            var e=ev||window.event;
+            if(e.preventDefault){
+                e.preventDefault();
+            }
+            else{
+                e.returnValue=false;//ie
+            }
+        }
+        //计算最终结果
+        function getResult(){
+            function evalResult(){
+                var result=eval(oinput.value);
+                return result;          
+            }
+            //捕获异常
+            try{
+                var x=evalResult();
+                return x;
+            }
+            catch (e){
+                oinput.className='showError';
+                var errorHint=document.getElementById('errorHint');
+                move(errorHint,'top',0);
+                setTimeout(function(){
+                    oinput.className='';
+                    move(errorHint,'top',-282);
+                },2000);
+                return oinput.value;
+            }
+        }
+        //文本框获取焦点，错误提示消失
+        //按下回车得到结果
+        function enterResult(ev){
+            var e=ev||window.event;
+            if(e.keyCode==13){
+                stopEvent(ev);//阻止enter键的默认行为
+                var result=getResult();
+                oinput.value=result;
+            }
+        }
+        //绑定点击事件
+        function init(){
+            var otable=document.getElementsByTagName('table')[0];
+            addEvent(otable,'keydown',function(ev){
+                enterResult(ev);
+            });
+            addEvent(otable,'click',function(ev){
+                stopEvent(ev);
+                var e=ev||window.event;
+                var itat=e.target||e.srcElement;
+                var obtns=document.getElementsByTagName('button');
+                if(itat.nodeName.toLowerCase()=='button'){
+                    for(var i=0;i<obtns.length;i++){
+                        obtns[i].style.borderColor='#000';
+                    }
+                    itat.style.borderColor='white';
+                    if(itat.className!='setChange'){
+                        if(oinput.value=='0'){
+                            oinput.value='';
+                            oinput.value+=itat.innerHTML;
+                        }
+                        else{
+                            oinput.value+=itat.innerHTML;
+                        }
+                    }else{
+                        if(itat.id=='backSpace'){
+                            oinput.value=oinput.value.toString().slice(0,-1);
+                        }
+                        else if(itat.id=='clearNum'){
+                            oinput.value='0';
+                        }else{
+                            var result=getResult();
+                            oinput.value=result;
+                        }
+                    }
+                }
+            });
+        }
+        init();
+    </script>
 </body>
 </html>

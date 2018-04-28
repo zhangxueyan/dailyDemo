@@ -1,19 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Document</title>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to{
+    opacity: 0;
+  }
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to{
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  </style>
 </head>
 <body>
-<script type="text/template">  
-hello world
-</script> 
-<script>
-var a = {n:1};
-var b = a;
-a.x = a = {n:2};
-console.log(b.x);//{n:2}
-</script>
+  <div id="app">
+   <button @click="isShow">aa</button>
+   <transition name="slide-fade">
+    <p v-if="show">hello</p>
+  </transition>
 
+  
+  <child-component>
+    <template slot-scope="props">
+      <span>{{props}}</span>
+    </template>
+  </child-component>
+
+  <my-list :items="items">
+      <li slot="item" slot-scope="props">{{props.text}}</li>
+  </my-list>
+
+  <girl-component :things="things">
+     <li slot="thing" slot-scope="props">{{props.text}}</li>
+  </girl-component>
+
+  </div>
+  <script>
+    var girlComponent = {
+      props:["things"],
+      template:"<ul><slot name='thing' v-for='thing in things' :text='thing.text'></slot></ul>"
+    }
+
+    var myList = {
+      props:["items"],
+      template:"<ul><slot name='item' v-for='item in items'  :text='item.text'></slot></ul>"
+    }
+
+    var childComponent = {
+      template:"<div><slot text='hello world'></slot></div>"
+    }
+
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        message:"hello",
+        show:true,
+        items:[
+         {text:'AA'},
+         {text:'AA'}
+         ],
+        things:[
+         {text:"chichi"},
+         {text:"hehehe"}
+         ]
+      },
+      components:{
+        childComponent,myList,girlComponent
+      },
+      methods:{
+        isShow:function(){
+          this.show = !this.show
+        }
+      }
+    })
+
+  </script>
+
+  <script>
+    var num = 17;
+    var arr = [5, 6, 8, 10, 16, 20, 24, 30];
+    var total=0;
+    for(var i=0;i<arr.length;i++){
+      total+=arr[i];
+      if(num<total){
+        // console.log("剪辑第"+(i+1)+"个视频源");
+      }
+    }
+  </script>
 </body>
 </html>

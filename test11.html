@@ -40,18 +40,26 @@
     <br>
     <p v-for="message in messages">{{message}}</p>
     <button-message v-on:message = "handleMessage"></button-message>
+    
 
-    <my-component>
-      <template slot-scope="props">
-        <span>hello from parent</span>
-        <span>{{ props }}</span>
+
+
+
+    <my-component :things="things" ref="profile">
+      <template slot="cute" scope='props'>
+         <li>{{props.thing}}</li>
       </template>
     </my-component>
+
+
   </div>
   <script>
+
     var myComponent = {
-       template:"<div>myComponent hello<slot img='hello slot new'></slot></div>"
-    }
+      props:["things"],
+      template:"<div><slot name='cute' v-for='thing in things' :thing='thing.what'></slot></div>"
+    } 
+
 
     var buttonMessage = {
       template:"<div><input type='text' value='hello' v-model='message'/><button @click='handleSendMessage'>send</button></div>",
@@ -109,12 +117,24 @@
       el:"#app",
       data:{
         messages:[],
+        message:"this is parent message",
         items:[
         {childItems:["1a","1b","1c"]},
         {childItems:["1a","1b","2c"]}
         ],
         names:["AA","BB","CC"],
-        counter:0
+        counter:0,
+        things:[  
+          {what:'逛'},  
+          {what:'吃'},  
+          {what:'打'},  
+          {what:'逛'},  
+          {what:'吃'},  
+          {what:'打'},  
+          {what:'逛'},  
+          {what:'吃'},  
+          {what:'打'}  
+        ]  
       },
       components:{
         myRow,myLi,buttonCounter,buttonMessage,myComponent
@@ -129,6 +149,7 @@
         }
       }
     })
+    console.log(vm.$refs.profile)
 
   </script>
 </body>
