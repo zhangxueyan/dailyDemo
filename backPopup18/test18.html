@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$(function () {
+            if (window.history && window.history.pushState) {
+                $(window).on('popstate', function() {
+                    var hashLocation = location.hash;
+                    var hashSplit = hashLocation.split("#!/");
+                    var hashName = hashSplit[1];
+
+                    if (hashName !== '') {
+                        var hash = window.location.hash;
+                        if (hash === '') {
+                            alert('后退被点击');
+                        }
+                    }
+                });
+                window.history.pushState('forward', null, '#');
+            }
+        });
+</script>
+
+</body>
+</html>
