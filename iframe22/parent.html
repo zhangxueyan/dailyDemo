@@ -1,0 +1,22 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <script src="js/jquery-1.10.2.min.js"></script> 
+    <title>Document</title>
+    <style>
+    #box{
+        height: 100px;
+        border: 1px solid red;
+    }
+    </style>
+</head>  
+<body>  
+    <p id="box">这是父窗口页面</p> 
+
+    <iframe src="child.html" frameborder="1" id="childIframe" name="Name"></iframe>
+    <script>
+        var childWindow = document.getElementById('childIframe').contentWindow;
+    </script>
+</body>  
+</html> 
