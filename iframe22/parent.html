@@ -1,22 +1,31 @@
-<!DOCTYPE html>  
-<html lang="en">  
+﻿<!DOCTYPE html>  
+<html lang="en" id="bd">  
 <head>  
     <meta charset="UTF-8">  
     <script src="js/jquery-1.10.2.min.js"></script> 
     <title>Document</title>
     <style>
-    #box{
-        height: 100px;
-        border: 1px solid red;
+    body{
+     border:2px solid red;
     }
     </style>
 </head>  
 <body>  
-    <p id="box">这是父窗口页面</p> 
+    <p id="outBox">这是父窗口页面</p> 
+    <button id="parentBtn" onclick="changeInnerStyle()">点击改变子元素</button><br><br><br>
+    
 
-    <iframe src="child.html" frameborder="1" id="childIframe" name="Name"></iframe>
+    <iframe src="child.html" frameborder="1" id="childIframe"></iframe>
     <script>
-        var childWindow = document.getElementById('childIframe').contentWindow;
+       function changeInnerStyle(){
+	var x=document.getElementById('childIframe');
+	var y=(x.contentWindow || x.contentDocument);
+	if (y.document){ y=y.document;}
+        y.getElementById("innerBox").style.backgroundColor="#ccc";
+
+     }
+
+
     </script>
 </body>  
 </html> 

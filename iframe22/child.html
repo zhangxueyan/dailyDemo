@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en"> 
 <head>  
     <meta charset="UTF-8">  
@@ -7,16 +7,15 @@
 </head>  
 <body>  
     <p id="innerBox">这是子窗口页面</p>
-    <button id="childBtn" value="aabb">点击改变父级元素的样式</button>
+    <button id="childBtn" onclick="changeOutStyle()">点击改变父元素</button>
     <script> 
     var bb = 1;
-    var aa = $("button");
-
-    $("button").click(function(){
-        var $box = $(parent.document.getElementById('box'));
-        console.log($box)
-        $box.animate({height:300});
-    })
+    var aa = 2;
+    function changeOutStyle(){
+      var $outBox = $(parent.document.getElementById('outBox'));
+      console.log($outBox)
+      $outBox.animate({height:300});
+     }
     </script>  
 </body>  
 </html> 
