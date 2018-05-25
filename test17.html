@@ -1,118 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<link rel="stylesheet" href="css/init.css">
-	<style>
-	 li{
-	 	cursor: pointer;
-	 	line-height: 50px;
-	 }
-	 .active{
-	 	color: red;
-	 }
-	 .text-danger{
-	 	font-size: 50px;
-	 	font-weight: bold;
-	 }
-	 .s1{
-	 	width: 1000px;
-	 	margin: 0 auto;
-	 	border: 1px solid #000;
-	 }
-	 .s1-h1{
-	 	margin-top: 10px;
-	 	position: relative;
-	 }
-
-	 .div1,.div2{
-	 	width: 400px;
-	 	border: 2px solid red;
-	 		 	height: 400px;
-	 		 	text-align: center;
-	 		 	line-height: 400px;
-	 }
-	 .div1{
-	 	float: left;
-	 }
-	 .div2{
-	 	float: right;
-	 }
-	 .clearfix{
-	 	clear: both;
-	 }
-	</style>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/init.css">
+  <style>
+    .clearfix:after{
+    	content:"";
+    	display: block;
+    	clear: both;
+    }
+  	.btn{
+  		width:100px;
+  		height: 40px;
+  		border: 1px solid red;
+  		float: left;
+  	}
+  	.tabs{
+  	   width:300px;
+  	   height: 200px;
+  	   border: 1px solid green;
+  	   position: relative;
+  	}
+  	.tab{
+  		width: 100%;
+  		height: 100%;
+  		position: absolute;
+  		left: 0;
+  		top:0;
+  		display: none;
+  	}
+  	.tab1{
+  		display: block;
+  	}
+  </style>
 </head>
 <body>
 
-	<div class="s1">
-		<div class="div1">AAAAAAAAAA</div>
-		<div class="div2">BBBBBBBBBB</div>
-		<div class="clearfix"></div>
-	</div>
-	<div id="app">
+<div class="btns clearfix">
+	<a href="javascript:;" class="btn">房产</a>
+	<a href="javascript:;" class="btn">家居</a>
+	<a href="javascript:;" class="btn">二手房</a>
+</div>
+<div class="tabs">
+	<div class="tab tab1">1111111</div>
+	<div class="tab tab2">2211111</div>
+	<div class="tab tab3">3311111</div>
+</div>
 
-		 <p ref="coco">{{a}}</p>
-
-         <p>{{aDouble}}</p>
-
-         <p>{{aPlus}}</p>
-
-	</div>
-	<script>
-		var vm = new Vue({
-			el:"#app",
-			data:{
-			 a:1,
-			 b:2,
-			 c:{
-			 	name:"coco",
-			 	age:25
-			 }
-			},
-			computed:{
-				aDouble:function(){
-					return this.a *2
-				},
-				aPlus:{
-					get:function(){
-						return this.a+1
-					},
-					set: function (v) {
-						this.a = v - 1
-					}
-				}
-			},
-			methods:{
-				plus:function(){
-					 this.a++
-				}
-			}
-		})
-		vm.$watch('b',function(newVal,oldVal){
-			console.log(newVal)
-			console.log(oldVal)
-		})
-
-		vm.$watch('c',function(newVal){
-			console.log(newVal)
-		},{deep:true})
-
-		vm.c.name="zhangxueyan"
-
-		Vue.set(vm.c,'name','lujialin')
-
-		vm.$set(vm.c,'name','lujiajia')
-
-		vm.$delete(vm.c,'age')
-		Vue.delete(vm.c,'age')
-
-		vm.$on('test',function(msg){
-			console.log(msg)
-		})
-		vm.$emit('test', 'hi')
-	</script>
+<script>
+    var btn = document.getElementsByClassName("btn");
+    var tab = document.getElementsByClassName("tab");
+    for(var i =0;i<btn.length;i++){
+    	btn[i].index = i;
+    	btn[i].onmouseenter= function(){
+    	  // 当前索引值
+    	  var idx = this.index;
+    	  console.log(this.index)
+    	  for(var j = 0;j<tab.length;j++){
+    		tab[j].style.display = "none";
+    	  }
+    	  tab[idx].style.display = "block";
+    	}
+    }
+</script>
 </body>
 </html>

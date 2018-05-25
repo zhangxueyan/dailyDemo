@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/init.css">
+	<style>
+		#box{
+			width: 500px;
+			height: 1000px;
+			border: 1px solid #333;
+			margin:300px auto 0;
+			font-size:22px;
+			line-height: 50px;
+			color: #000;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">原生js实现点击按钮 缓慢移动至某个位置</div>
+	<button id="btn" onclick="obj.toTop()">点击返回</button>
+	<script>
+        var btn = document.getElementById('btn');
+        var box = document.getElementById('box');
+	    var obj = {
+            toTop:function(){
+                //toTop 滚动到顶部
+                var currentPosition,timer;
+                var speed=10;
+                timer=setInterval(function(){
+                    currentPosition=document.documentElement.scrollTop || document.body.scrollTop;
+                    currentPosition-=speed; //speed变量
+                    if(currentPosition>0){
+                        window.scrollTo(0,currentPosition);
+                    }else{
+                        window.scrollTo(0,0);
+                        clearInterval(timer);
+                    }
+                },1);
+            }      
+	   }
+	   
+	   
+		
+	</script>
+</body>
+</html>

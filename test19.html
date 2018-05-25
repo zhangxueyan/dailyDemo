@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>  
+  <link rel="stylesheet" href="css/init.css">   
+ </head> 
+ <body> 
+    <table border="1" width="50%" id="table">
+        <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>操作</th>
+        </tr>  
+
+        <tr>
+        <td>xh001</td>
+        <td>王小明</td>
+        <td><a href="javascript:;" onclick="deltr(this)">删除</a></td>   <!--在删除按钮上添加点击事件  -->
+        </tr>
+
+        <tr>
+        <td>xh002</td>
+        <td>刘小芳</td>
+        <td><a href="javascript:;" onclick="deltr(this)">删除</a></td>   <!--在删除按钮上添加点击事件  -->
+        </tr>  
+    </table>
+    <input type="button" value="添加一行" onclick="addtr()" />
+     
+    <script type="text/javascript">
+
+        //删除节点
+          function deltr(btn){
+              var parNode = btn.parentNode.parentNode;
+               parNode.remove()
+
+          }
+              // 编写一个函数，供添加按钮调用，动态在表格的最后一行添加子节点；
+              function addtr(){
+                var sNum=prompt('请输入学号','');
+                var sName=prompt('请输入姓名','');
+                if(sNum!=null&&sNum!=''&&sName!=null&&sName!=''){
+
+                  var newtr=document.createElement('tr');
+                  newtr.innerHTML='<td>'+sNum+'</td>'+'<td>'+sName+'</td>'+'<td><a href="javascript:;" onclick="deltr(this)">删除</a></td>';
+                  var ele=document.getElementsByTagName("tbody")[0];
+                  ele.appendChild(newtr);
+                }else{alert('请重新输入');}
+              }
+
+    </script> 
+ </body>
+</html>

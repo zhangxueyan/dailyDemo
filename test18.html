@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <title>Document</title>
+	<style>
+   .box{
+    width:200px;
+    height: 300px;
+    color: #000;
+    border:1px solid red;
+    position: relative;
+   }
+	</style>
+</head>
+<body>
+
+<button class="paly">paly</button>
+<button class="stop">stop</button>
+<div class="box">
+  这是测试box
+</div>
+
+<button onclick="loadXMLDoc()">点击获取数据</button>
+
+
+
+
+<script>
+  var person = {
+    name:"Nicholas",
+    age:29,
+    5:true
+  }
+  console.log(person[5])
+
+
+
+  function loadXMLDoc(){
+    var xmlhttp= new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+      if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        console.log(xmlhttp.responseText)
+      }
+    }
+    xmlhttp.open("GET","https://zhangxueyan.github.io/private/test.txt",true);
+    xmlhttp.send();
+  }
+
+  $(".paly").click(function(){
+    $("div").animate({width:500,height:500},2000);
+  })
+
+  $(".stop").click(function(){
+    $("div").stop()
+  })
+
+  function getData(){
+    $.ajax({
+      url:'https://zhangxueyan.github.io/private/test.txt',
+      type: 'GET',   
+      success:function(data) {    
+        console.log(data);
+      }
+    });
+  }
+</script>
+</body>
+</html>
