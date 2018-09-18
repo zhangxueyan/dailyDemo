@@ -44,7 +44,18 @@
     <li class="item">4</li>
     <li class="item">5</li>
   </ul> 
-  <script>
+
+
+  <div class="box" id="box">
+    <span>1111</span>
+    <span>2222</span>
+    <span>3333</span>
+  </div>
+
+
+
+
+<!--   <script>
     var $item = $(".item");
     var i = 0;
     setInterval(function(){
@@ -55,6 +66,33 @@
       var $now_item = $($item[i++]);
       $now_item.addClass("active")
     },1000)
+  </script> -->
+
+  <script>
+    var allItems = document.getElementsByTagName('li');
+    var i =0;
+    setInterval(function(){
+      if(i>=allItems.length){
+        i=0
+      }
+      for(var j =0;j<allItems.length;j++){
+        allItems[j].removeAttribute('style')
+      }
+      allItems[i].style.background="red"
+       i++
+    },10000)
+  </script>
+
+
+  <script>
+    var spans = document.getElementById("box");
+    
+    var arr1 = spans.children;
+    console.log(arr1);
+
+    var arr2 = spans.childNodes;
+    console.log(arr2);
+
   </script>
 </body>
 </html>

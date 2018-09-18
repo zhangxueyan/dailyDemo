@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/init.css">
+  <style>
+    .box{
+      border: 1px solid red;
+      height: 50px;
+      padding: 5px;
+    }
+    #fot-info{
+      height: 40px;
+      overflow: hidden;
+      background: #e2e2e8;
+    }
+    #fot-info li{
+      line-height: 40px;
+      cursor: pointer;
+      float: left;
+      width: 400px;
+    }
+    #fot-info{
+      overflow: hidden;
+      width:100%;
+    }
+    .fot-info{
+      width:200%;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div id="fot-info">
+       <ul class="fot-info">
+        <li>这里是滚动信息1</li>
+        <li>这里是滚动信息2</li>
+        <li>这里是滚动信息3</li>
+        <li>这里是滚动信息4</li>
+        <li>这里是滚动信息5</li>
+        <li>这里是滚动信息6</li>
+        <li>这里是滚动信息7</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    function rollLeft(area){
+        area.innerHTML+=area.innerHTML
+        function scrollLeft(){
+          if(area.scrollLeft-area.offsetWidth/2>=0){
+           area.scrollLeft-=area.offsetWidth/2;
+         }
+         else{
+           area.scrollLeft++;
+         }
+       }
+       var timer=setInterval(scrollLeft,30);
+       area.onmouseout=function (){timer=setInterval(scrollLeft,30);}
+       area.onmouseover=function(){clearInterval(timer);}
+      }
+      var fotInfo = document.getElementById('fot-info');
+      rollLeft(fotInfo)
+  </script>
+</body>
+</html>

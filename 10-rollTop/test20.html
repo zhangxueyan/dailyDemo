@@ -9,18 +9,32 @@
 			width: 500px;
 			height: 1000px;
 			border: 1px solid #333;
-			margin:300px auto 0;
+			margin:500px auto 0;
 			font-size:22px;
 			line-height: 50px;
 			color: #000;
 			text-align: center;
+		}
+		#box2{
+			width: 500px;
+			height: 1000px;
+			border: 1px solid #333;
+			margin:0 auto 0;
+			font-size:22px;
+			line-height: 50px;
+			color: #000;
+			text-align: center;	
 		}
 	</style>
 </head>
 <body>
 	<div id="box">原生js实现点击按钮 缓慢移动至某个位置</div>
 	<button id="btn" onclick="obj.toTop()">点击返回</button>
+
+	<div id="box2">这是box2 任意位置 不是顶部</div>
+	<button id="btn2" onclick="objet.toTarget()">点击返回</button>
 	<script>
+
         var btn = document.getElementById('btn');
         var box = document.getElementById('box');
 	    var obj = {
@@ -39,10 +53,29 @@
                     }
                 },1);
             }      
-	   }
-	   
-	   
-		
+	    }
+	    var btn2 = document.getElementById('btn2');
+	    var box2 = document.getElementById('box2');
+	    var objet = {
+	    	toTarget:function(){
+	    	  var currentPosition,targetPosition,timer;
+	    	  var speed=5;
+              timer = setInterval(function(){
+		    	  currentPosition=document.documentElement.scrollTop || document.body.scrollTop;
+		    	  targetPosition = box.offsetTop;
+		    	  console.log(currentPosition)
+		    	  console.log(targetPosition)
+	              if(currentPosition>targetPosition){
+	                  currentPosition-=speed;
+	                  window.scrollTo(0,currentPosition);
+	              }
+	              else{
+	              	   clearInterval(timer)
+	              }
+
+              },1)
+	    	}
+	    }
 	</script>
 </body>
 </html>

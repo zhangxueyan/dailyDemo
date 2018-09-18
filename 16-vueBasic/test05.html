@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<style>
+		#box{
+			line-height: 50px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">ECMAScript 6入门</div>
+	<script>
+     var box = document.getElementById("box");
+
+     var para = document.createElement("p");
+
+     var node = document.createTextNode("hello world")
+
+     para.appendChild(node)
+
+     box.appendChild(para)
+
+   
+    var obj1 = '{ "name":"runoob", "alexa":10000}';
+    var myString = JSON.parse(obj1)
+    console.log(obj1);
+    console.log(myString)
+
+    var obj2 = { "name":"runoob", "alexa":10000};
+    var myJSON = JSON.stringify(obj2);
+    console.log(obj2)
+    console.log(myJSON)
+
+
+
+    $.ajax({
+       url:"https://zhangxueyan.github.io/private/test.txt",
+       dataType:"json",
+       success:function(data){
+          console.log(data)
+      }
+    })
+
+    
+
+	</script>
+</body>
+</html>

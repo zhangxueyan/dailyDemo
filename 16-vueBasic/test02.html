@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="utf-8"/>
+  <title>vue简单关键词搜索的应用</title> 
+    <link rel="stylesheet" href="css/init.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <style>
+  #app{margin:100px;}
+  .item{width:500px;min-height:100px;box-shadow:0px 0px 2px #bbb;transition:box-shadow 0.9s ease;padding:10px;margin-bottom:20px;}
+  .item:hover{box-shadow:0px 0px 7px #00f;}
+  .title{font-size:14px;cursor:pointer;}
+  .sender{margin:5px auto;}
+  .sender,.time{font-size:12px;color:#888;display:inline-block;margin-right:30px;}
+  input[type=text]{width:200px;height:30px;padding:2px 5px 2px 5px;border:2px solid #00f;display:inline-block;margin-bottom:20px;font-size:16px;}
+  input[type=text]:focus{box-shadow:0 0 5px rgba(0,0,255,0.4);}
+  [type=button]{outline:none;border:none;width:100px;height:38px;color:#fff;background-color:rgba(0,0,130,0.4);}
+  [type=button]:hover{cursor:pointer;}
+</style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" name="search" id="search">
+    <button type="button" @click="search">搜索一下</button>
+      <div class="item" v-if="getword(item)" v-for="item in itemData">  
+       <div class="title">
+         <h2 v-html="setColor(item.title ,document.getElementById('search').value)"></h2>
+       </div>
+       <p class="title" v-html="setColor(item.content ,document.getElementById('search').value)"></p>
+       <div class="title sender" v-html="setColor(item.name ,document.getElementById('search').value)"></div>
+       <div class="title time">{{ item.time }}</div>
+     </div>
+ </div>
+
+ <script>
+  var data = [
+  {
+    title:"雄安新区召开三县干部会议：强调防止炒房影响投资",
+    content:"澎湃新闻（www.thepaper.cn）获悉，4月3日上午9时，河北保定市下辖雄县、容城、安新三县村以上干部在容城县金孔雀温泉酒店7楼召开“雄安新区驻村工作学习培训会议”，会议由河北省雄安新区临时党委副书记、筹备工作委员会主任刘宝玲主持。会议一直开到当天中午十二点多才结束。",
+    name: "来源: 人民日报",
+    time: new Date().getFullYear()+"-"+(new Date().getMonth()+1)+
+    "-"+new Date().getDate()
+  },
+  {
+    title:"中国第六代战机要来了 三大关键特征曝光相当科幻",
+    content:"近日，中国歼-20总设计师杨伟在接受媒体采访时，称中国正在展开六代机的研制工作，有评论称六代机可能是科幻电影最大胆的想象都没有描述过的外形，其实，六代机没那么玄乎，它的发展趋势还是有迹可循的。",
+    name: "来源: 朝日新闻",
+    time: new Date().getFullYear()+"-"+(new Date().getMonth()+1)+
+    "-"+new Date().getDate()
+  },
+  {
+    title:"习近平在芬兰媒体发表署名文章",
+    content:"我曾经两次到访芬兰，这里纯净秀丽的林湖风光、勤勉创新的发展理念、淳厚安宁的人文风情，给我留下美好印象。芬兰地处东西方文明交汇前沿，数百年来，芬兰人民在历史激荡中奋勇前行，发扬坚韧不拔的“西苏”精神，取得民族独立、国家富强的伟大成就。这里孕育了交响乐大师西贝柳斯，研发出享誉世界的Linux操作系统，并发展成全球幸福和清廉指数最高的国家之一。",
+    name: "来源: 财经网",
+    time: new Date().getFullYear()+"-"+(new Date().getMonth()+1)+
+    "-"+new Date().getDate()
+  },
+  {
+    title:"共享单车相随总理走出国门",
+    content:"今年1月，摩拜单车创始人被李克强总理请入中南海参加座谈。总理当时肯定这家企业“依托互联网和服务业带动制造业的发展”。他特别强调，对新产业新业态新模式要本着鼓励创新，探索审慎监管方式，使市场包容有序、充满活力。",
+    name: "来源: 新华社",
+    time: new Date().getFullYear()+"-"+(new Date().getMonth()+1)+
+    "-"+new Date().getDate()
+  },
+  {
+    title:"黑客如何超越麦克风，窃听你的一举一动！",
+    content:"白宫总统顾问康威（Kellyanne Conway）在接受媒体采访时称，前总统奥巴马对川普阵营的实际监控可能比川普总统暗示的监听他的手机更广泛，监听设备甚至可以是微波炉，引发网友嘲讽。",
+    name: "来源: 纽约时报",
+    time: new Date().getFullYear()+"-"+(new Date().getMonth()+1)+
+    "-"+new Date().getDate()
+  }
+  ];
+
+
+
+
+  var vm = new Vue({
+   el: "#app",
+   data:{
+    search_cont:"",
+    itemData: data
+  },
+  methods:{
+   setColor:function(item, val){
+      var patt = new RegExp(val,'ig');
+      return item.replace(patt,"<span style='color:#f00'>" + val + "</span>")     
+    },
+   search:function(){
+      this.search_cont = document.getElementById("search").value; 
+    },
+   getword:function(item){
+      var key = this.search_cont;
+      var reArray = Object.keys(item).some(function(curKey){
+        return String(item[curKey]).toLowerCase().indexOf(key.toLowerCase())>-1
+      })
+       if(reArray){return true}
+   }
+  }
+})
+
+
+
+
+
+
+</script>
+</body>
+</html>

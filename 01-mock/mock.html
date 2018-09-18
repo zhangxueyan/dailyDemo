@@ -7,45 +7,28 @@
   <script src="js/mock.js"></script>
 </head>
 <body>
-  <script>
-    //模拟后台
+<script type="text/javascript">
     Mock.mock('http://api.com', {
-    	"nav|10": [{
-            'cate': 'xiaomi',
-             isShow:false,
-             cateChild:[
-                 {
-                   'isNew': true, 
-                   'name': 'xmMIX2', 
-                   'price': 3299  
-                 },
-                 {
-                   'isNew': true, 
-                   'name': 'xmMIX2', 
-                   'price': 3299  
-                 },              
-                 {
-                   'isNew': true, 
-                   'name': 'xmMIX2', 
-                   'price': 3299  
-                 }
-            ]
-        }]
-    });
-
-    //JQuery方式
-    // $.ajax({
-    //     url: 'http://api.com',
-    //     dataType: 'json'
-    // }).done(function(data, status, xhr) {
-    //     console.log(JSON.stringify(data, null, 4))
-    // });
+     "newsList|20":[
+       {
+         'title': '近邻宝受邀参展数博会 贵阳国际会议中心期待您的到来',
+         'date': '05-25',
+         "id|+1":1,
+         'text': '中国国际大数据产业博览会(简称数博会)，作为全球首个大数据主题的国家级博览会，现已成长为全球大数据发展的风向标和业界最具国际性、权威性的平台。',
+         'button':'阅读全文'
+       }
+     ]
+   });
     $.ajax({
       url: 'http://api.com',
       dataType: 'json'
-    }).done(function(data) {
-      console.log(JSON.stringify(data,null,4))
+    }).done(function(res) {
+      var data = JSON.stringify(res,null,4)
+      console.log(data)
+      $("body").text(data)
     });
 </script>
 </body>
 </html>
+
+

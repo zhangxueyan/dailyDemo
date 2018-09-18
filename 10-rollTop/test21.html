@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Document</title>
+</head>
+<body>
+  <div class="input">
+    <input type="text"  placeholder="用户名" class="name">
+    <input type="text"  placeholder="密码" class="password">
+  </div>
+
+
+  <script>
+
+    var name = document.getElementsByTagName('input')[0];
+    name.onfocus = function(){
+      if(this.value=='用户名'){
+         this.value=' '
+      }
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pagination</title> 
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <style>
+    #app{
+      width: 1000px;
+      margin:0 auto;
+    }
+    .clearfix:after{
+      content:"";
+      display: block;
+      clear: both;
+    }
+    .itemNews{
+      border-top: 1px solid #ccc;
+      border-bottom:1px solid #ccc; 
+      padding:10px 0;
+    }
+    .item-titl h2{
+      width:800px;
+      font-size:20px;
+      line-height: 40px;
+      float: left;
+    }
+    .item-titl span{
+      width: 80px;
+      font-size:20px;
+      line-height: 40px;
+      float: right;
+    }
+    .item-text{
+      width: 800px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  </style>
+    <style type="text/css">
+      ul,li {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .page-bar li {
+        list-style: none;
+        display: inline-block;
+      }
+
+      .page-bar li:first-child>a {
+        margin-left: 0px
+      }
+
+      .page-bar a {
+        border: 1px solid #ddd;
+        text-decoration: none;
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        cursor: pointer
+      }
+
+      .page-bar a:hover {
+        background-color: #eee;
+      }
+
+      .page-bar .active a {
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border-color: #337ab7;
+      }
+
+      .page-bar i {
+        font-style:normal;
+        color: #d44950;
+        margin: 0px 4px;
+        font-size: 12px;
+      }
+    </style>
+</head>
+<body>
+  <div id="app">
+    <div class="newsList">
+       <div class="itemNews" v-for="(item,index) in items" :key="item.id">
+        <div class="item-titl clearfix">
+          <h2>{{index}}{{item.title}}</h2>
+          <span>{{item.date}}</span>
+        </div>
+        <p class="item-text">{{item.text}}</p>
+        <a>{{item.button}}</a>
+        </div>
+    </div>
+
+    <div style="margin-top:30px;">你点击了第{{cur}}页</div>
+    <div class="page-bar">
+      <ul>
+      <li v-if="cur!=1"><a v-on:click="cur--">上一页</a></li>
+      <li v-for="index in indexs" v-bind:class="{ active: cur == index}">
+          <a v-on:click="btnClick(index)">{{ index }}</a>
+      </li>
+      <li v-if="cur!=all"><a v-on:click="cur++">下一页</a></li>
+      <li><a>共<i>{{all}}</i>页</a></li>
+      </ul>
+    </div>
+  </div>
+<script type="text/javascript">
+var mockdata = { "newsList": [ { "title": "近邻宝受邀参展数博会 贵阳国际会议中心期待您的到来", "date": "05-25", "id": 1, "text": "中国国际大数据产业博览会(简称数博会)，作为全球首个大数据主题的国家级博览会，现已成长为全球大数据发展的风向标和业界最具国际性、权威性的平台。", "button": "阅读全文" }, { "title": "近邻宝受邀参展数博会 贵阳国际会议中心期待您的到来", "date": "05-25", "id": 2, "text": "中国国际大数据产业博览会(简称数博会)，作为全球首个大数据主题的国家级博览会，现已成长为全球大数据发展的风向标和业界最具国际性、权威性的平台。", "button": "阅读全文" }, { "title": "近邻宝受邀参展数博会 贵阳国际会议中心期待您的到来", "date": "05-25", "id": 3, "text": "中国国际大数据产业博览会(简称数博会)，作为全球首个大数据主题的国家级博览会，现已成长为全球大数据发展的风向标和业界最具国际性、权威性的平台。", "button": "阅读全文" }, { "title": "近邻宝受邀参展数博会 贵阳国际会议中心期待您的到来", "date": "05-25", "id": 4, "text": "中国国际大数据产业博览会(简称数博会)，作为全球首个大数据主题的国家级博览会，现已成长为全球大数据发展的风向标和业界最具国际性、权威性的平台。", "button": "阅读全文" },{ "title": "近邻宝受邀参展数博会 贵阳国际会议中心期待您的到来", "date": "05-25", "id": 5, "text": "中国国际大数据产业博览会(简称数博会)，作为全球首个大数据主题的国家级博览会，现已成长为全球大数据发展的风向标和业界最具国际性、权威性的平台。", "button": "阅读全文" } ] }
+  var app = new Vue({
+      el: '#app',
+      data:{
+        cur: 1,
+        all: '',
+        msg: '',
+        items:mockdata.newsList,
+        size:2
+      },
+    mounted(){
+      this.set()
+    },
+    computed: {
+      indexs() {
+        // indexs索引值得数组1-all
+        var left = 1
+        var right = this.all //20
+        var ar = [] 
+        // if (this.all >= 11) {
+        //   if (this.cur > 5 && this.cur < this.all - 4) {
+        //     left = this.cur - 5
+        //     right = this.cur + 4
+        //   } else {
+        //     if (this.cur <= 5) {
+        //       left = 1
+        //       right = 10
+        //     } else {
+        //       right = this.all
+        //       left = this.all -9
+        //     }
+        //   }
+        // }
+        while (left <= right) {
+          ar.push(left)
+          left ++
+        }
+        return ar
+      }
+    },
+    watch:{
+      cur:function(oldValue,newValue){
+         // console.log(arguments);
+      }
+    },
+    methods: {
+        btnClick: function(data){//页码点击事件
+            if(data != this.cur){
+                this.cur = data
+                console.log(this.cur)
+            }
+        },
+      set:function(){
+        this.all = Math.ceil(this.items.length/2)
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

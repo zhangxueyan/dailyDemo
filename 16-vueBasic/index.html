@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/init.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+        *{
+            line-height:40px;
+        }
+        body{
+            padding-left:50px;
+        }
+    </style>
+</head>
+<body>
+	<div id="app">
+
+
+
+         <input type="text" v-model="message"  v-default3='color'>
+
+         <p>{{ message | capitalize }}</p>
+
+         <component-a :message="message"></component-a>
+
+         <component-b name="zhangxueyan"></component-b>
+
+         {{parentNum}}
+         <component-c :child-num = "parentNum" @transition-event ="parentEvent"></component-c>
+
+         <p>my fullname is {{getCount}}</p>
+
+         <p @click="getFull">my fullname is {{full}}</p>
+
+
+         <input type="text" v-model="key1">
+         <button @click="filterItems1">搜索1</button>
+
+         <ul>
+             <li v-for="arrayItem in arrayItems">{{arrayItem}}</li>
+         </ul>
+
+
+         <input type="text" id="search" v-model="search_cont">
+         <button @click="getWord">搜索2</button>
+         <ul>
+             <li v-for="objectItem in objectItems">
+                <h2 v-html = "setColor(objectItem.title,search_cont)"></h2>
+                <p>{{objectItem.price}}</p>
+            </li>
+         </ul>
+	</div>
+	<script>
+    var ComponentA = {
+        props:["message"],
+    	template: '<div>my name is coral {{message}}</div>'
+    }
+    var ComponentB = {
+    	props:['name'],
+    	template:'<div>my name is {{name}}</div>'
+    }
+    var ComponentC = {
+        props:['childNum'],
+        template:'<div>You clicked me<button @click="add">{{count}}</button>{{childNum}}</div>',
+        data:function(){
+        	return {
+        		count:0
+        	}
+        },
+        methods:{
+           add:function(){
+            this.count ++
+            this.$emit("transition-event")
+           }
+        }
+    }
+    var vm = new Vue({
+    	el:'#app',
+    	data:{
+            parentNum:10,
+            arrayItems:['a这是2018年','b这是2019年','c那是2018年'],
+            key1:'',
+
+            objectItems:[
+              {title:'A2017年一级双师(何老师)',price:9980,discount:9000,brief:'授课模式:直播、录播',num:2061,type:1,id:1101},
+              {title:'b2017年二级双师(张老师)',price:9980,discount:9000,brief:'授课模式:直播、录播',num:2061,type:1,id:1101},
+              {title:'c2017年二级双师(林老师)',price:9980,discount:9000,brief:'授课模式:直播、录播',num:2061,type:1,id:1101}
+            ],
+            search_cont:'',
+    		message:"red",
+    		color:'red',
+    		outerName:'coco',
+    		first:"zhang",
+    		last:"xueyan",
+    		full:'',
+    		 a: 1,
+    		 b: 2,
+    		 c: 3,
+    		 d: 4,
+    		 e:{
+    		 	f:5
+    		 },
+    		 g:['AA','BB']
+    	},
+    	watch:{
+    		a:function(val,oldval){
+              console.log(val,oldval)
+    		},
+    		b:'someMethod',
+    		e:{
+    		  handler: function (val, oldval) {
+    		 	console.log(val,oldval)
+    		  },
+    		  deep: true,
+    		  immediate: true
+    		},
+    		g:{
+    		   handler: function (val, oldval) {
+    				console.log(val,oldval)
+    		   }
+    		},
+           'e.f':function (val, oldval) { 
+           	   console.log(val,oldval)
+            }
+    	},
+    	computed:{
+    		getCount:function(){
+    			return this.first+this.last
+    		}
+    	},
+    	methods:{
+            parentEvent:function(){
+              this.parentNum++
+            },
+            filterItems1:function(){
+                var key = this.key1;
+                this.arrayItems = this.arrayItems.filter(function(curItem){
+                  return curItem.toLowerCase().indexOf(key.toLowerCase()) > -1
+                })
+            },
+            filterItems2:function(){
+                var key = this.key2;
+                this.objectItems = this.objectItems.filter(function(curItem){
+                  return Object.keys(curItem).some(function(curKey){
+                    return String(curItem[curKey]).toLowerCase().indexOf(key.toLowerCase())>-1
+                  })
+                })
+            },
+            setColor:function(item,val){
+                var patt = new RegExp(val,'gi');
+                return item.replace(patt,"<span style='color:#ff0000'>"+val+"</span>")
+            },
+            getWord:function(){
+                var key = this.search_cont;
+                this.objectItems = this.objectItems.filter(function(curItem){
+                  return Object.keys(curItem).some(function(curKey){
+                    return String(curItem[curKey]).toLowerCase().indexOf(key.toLowerCase())>-1
+                  })
+                })
+            },
+    		getFull:function(){
+    			this.full = this.first+this.last
+    		},
+    		someMethod:function(curVal,oldVal){
+    		   console.log(curVal,oldVal)
+    		}
+    	},
+    	directives:{
+    		default3:function(el,binding){
+    			 el.style.color = binding.value
+    		}
+    	},
+    	filters: {
+    		capitalize: function (value) {
+    			if (!value) return ''
+    			value = value.toString()
+    			return value.slice(0,1).toUpperCase()+value.slice(1)
+    		}
+    	},
+    	components:{
+    		'component-a':ComponentA,
+    		'component-b':ComponentB,
+    		'component-c':ComponentC
+    	}
+    })
+    vm.a = 'a' + 1
+    vm.b = 'b' + 2
+    vm.e.f = 'ef' + 5
+    vm.g = ['CC','DD']
+
+    console.log(ComponentC)
+	</script>
+</body>
+</html>
