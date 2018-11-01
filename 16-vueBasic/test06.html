@@ -3,41 +3,47 @@
 <head>
 	<title>Document</title>
   <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <style>
+  input[type='checkbox']{
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    -webkit-appearance:none;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    outline: none;
+  }
+  .checkBox input[type=checkbox]:checked{
+    background-color: #000000;
+  }
+
+input::-ms-input-placeholder{text-align: center; color:#000}
+input::-webkit-input-placeholder{text-align: center; color:#000}
+input::-moz-placeholder{text-align: center; color:#000}
+
+
+</style>
 </head>
 <body>
 
+    <label class="checkBox"><input type="checkbox">全选</label>
 
 <div>
   <span class="day"></span>天
   <span class="hours"></span>时
   <span class="minutes"></span>分
   <span class="seconds"></span>秒
-  <!-- <span class="minSeconds"></span> -->
 </div>
 
-
 <!-- <script type="text/javascript">
- var sum="";
- for(var i =1;i<=9;i++){
- 	for(var j = 1;j<=i;j++){
- 	   sum+=i+'*'+j+"="+i*j+" ";
- 	}
- 	sum+="\n";
- }
- console.log(sum)
-</script> -->
-
-<!-- <script type="text/javascript">
- for(var i =1;i<=9;i++){
- 	for(var j = 1;j<=i;j++){
- 	   document.write(i+'*'+j+"="+i*j+" ")
- 	}
- 	document.write("<br>");
- }
-</script> -->
-
-
-<!-- <script type="text/javascript">
+   for(var i =1;i<=9;i++){
+   	for(var j = 1;j<=i;j++){
+   	   document.write(i+'*'+j+"="+i*j+" ")
+   	}
+   	document.write("<br>");
+   }
+</script>
+<script type="text/javascript">
   var str="";
   for(var i =1;i<=9;i++){
   	for(var j =1;j<=i;j++){
@@ -49,7 +55,6 @@
 </script> -->
 
 <!-- 截止日期是两天后24:00 -->
-
 <script type="text/javascript">
 
 function showTime(){
@@ -64,21 +69,15 @@ var nowDate = new Date();//now
 // endDateFormat.setSeconds(59)
 
 // var endDateFormat = new Date("2019/1/1 00:00:00");
-
 // var endDateFormat = new Date("2019-1-1 00:00:00");
-
-var endDateFormat = new Date("2019/01/01 00:01:02");
-
+var endDateFormat = new Date("2018/10/01 00:01:02");
 var startTime = nowDate.getTime();
 var endTime = endDateFormat.getTime();
 var interval = endTime - startTime;
 
 var d = Math.floor(interval/1000/60/60/24);
-
 var h = Math.floor(interval/1000/60/60%24);
-
 var m = Math.floor(interval/1000/60%60);
-
 var s = Math.floor(interval/1000%60);
 
 $(".day").text(d)
@@ -88,10 +87,6 @@ $(".seconds").text(s)
 }
 
 setInterval(showTime,1000)
-
-
-Date.UTC(new Date())
-
 </script>
 
 

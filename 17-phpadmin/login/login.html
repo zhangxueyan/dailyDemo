@@ -1,0 +1,88 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>login test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="jquery-1.10.2.min.js"></script>
+    <style>
+        #form_tijiao{
+            border:1px solid #000;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<input class="name" type="text" placeholder="请输入您的姓名" id="name">
+<input class="tel" type="text" placeholder="请输入您的手机号" id="tel">
+<span  id="form_tijiao">点击</span>
+
+<script type="text/javascript">
+    $('#form_tijiao').click(function(){
+        // var name= $("#name").val();
+        // var tel = $("#tel").val();
+        var name= encodeURIComponent($("#name").val());
+        var tel = encodeURIComponent($("#tel").val());
+
+        if(!tel){ alert("对不起，联系电话选项不能为空!");return false;}
+        var check_mobile = /^1(3|4|5|7|8)[0-9]{9}$/;
+        // var check_mobile = /^1[34578][0-9]{9}$/;
+        if(!(check_mobile.test(tel))){
+           alert("请您输入正确的手机号");
+           return false;
+        }
+        $.ajax({
+            type:"post",
+            url:"login.php",
+            data:{
+                "name":name,
+                "tel":tel
+            },
+            success:function (data, status, xhr) {
+             console.log(data)
+             alert('提交成功！')
+             $('#name').val("")
+             $('#tel').val("")
+            }
+        })
+    })
+</script>
+
+
+<script type="text/javascript">
+        function isTel(indexxx) {
+            if ($("#Orders_Tel"+indexxx).val() == "") {
+                alert("手机号码不能为空！");
+                $("#Orders_Tel"+indexxx).focus();
+                return false;
+            }
+            var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var liua=myreg.test($("#Orders_Tel"+indexxx).val());
+            var liub=$("#Orders_Tel"+indexxx).val().match(/^0[\d]{2,3}-[\d]{7,8}$/);
+            if(!(liua||liub))
+            {
+                alert("手机号码格式不正确！");
+                $("#Orders_Tel"+indexxx).focus();
+                return false;
+            }
+            tijiao(indexxx);
+        }
+
+        function tijiao(indexxxx){
+            var a=encodeURIComponent($("#Orders_Name"+indexxxx).val());
+            var b=encodeURIComponent($("#Orders_Tel"+indexxxx).val());
+            var c=encodeURIComponent($("#liuschool"+indexxxx).val());
+            var url="http://101.200.85.33:8090/message/msg/save.do";
+            $.ajax({
+                url:url,
+                data:{"liuname":a,"liutel":b,"liuschool":c,"biaoji":encodeURIComponent(window.location.href)},
+                dataType:'JSONP',
+                type:'post',
+                success:function(data){
+                    alert("提交成功");
+                }
+            });
+            alert("提交成功");
+        }
+</script>
+</body>
+</html>

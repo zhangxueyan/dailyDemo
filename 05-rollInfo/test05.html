@@ -37,17 +37,19 @@
     //间歇性滚动
     var fotInfo = document.getElementById("fot-info");
     function scrollInfo(area,lineheight){
+     var speed = 20;
+     var delay = 500;
      area.innerHTML+=area.innerHTML;
      var timer=null,timeout=null;
      area.scrollTop = 0;
      function startMove(){
-      timer = setInterval(scrollUp,20)
+      timer = setInterval(scrollUp,speed)
       area.scrollTop++
      }
      function scrollUp(){
       if(area.scrollTop%lineheight===0){
         clearInterval(timer)
-        timeout = setTimeout(startMove,500)
+        timeout = setTimeout(startMove,delay)
       }
       else{
         area.scrollTop++
@@ -56,7 +58,7 @@
         }
       }
      }
-     timeout = setTimeout(startMove,500)
+     timeout = setTimeout(startMove,delay)
      area.onmouseover = function(){clearInterval(timer),clearTimeout(timeout)}
      area.onmouseout = function(){timer=setInterval(scrollUp,20)}
     }
