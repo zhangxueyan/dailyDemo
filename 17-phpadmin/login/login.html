@@ -18,14 +18,14 @@
 
 <script type="text/javascript">
     $('#form_tijiao').click(function(){
-        // var name= $("#name").val();
-        // var tel = $("#tel").val();
-        var name= encodeURIComponent($("#name").val());
-        var tel = encodeURIComponent($("#tel").val());
+        var name= $("#name").val();
+        var tel = $("#tel").val();
+        // var name= encodeURIComponent($("#name").val());
+        // var tel = encodeURIComponent($("#tel").val());
 
         if(!tel){ alert("对不起，联系电话选项不能为空!");return false;}
-        var check_mobile = /^1(3|4|5|7|8)[0-9]{9}$/;
-        // var check_mobile = /^1[34578][0-9]{9}$/;
+        // var check_mobile = /^1(3|4|5|7|8)[0-9]{9}$/;
+        var check_mobile = /^1[34578][0-9]{9}$/;
         if(!(check_mobile.test(tel))){
            alert("请您输入正确的手机号");
            return false;
@@ -38,7 +38,6 @@
                 "tel":tel
             },
             success:function (data, status, xhr) {
-             console.log(data)
              alert('提交成功！')
              $('#name').val("")
              $('#tel').val("")

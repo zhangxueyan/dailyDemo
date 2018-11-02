@@ -9,11 +9,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error); 
 }
 
-// $name = $_POST['name'];
-// $tel = $_POST['tel'];
+$name = $_POST['name'];
+$tel = $_POST['tel'];
 
-$name = urldecode($_POST['name']);
-$tel = urldecode($_POST['tel']);
+// $name = urldecode($_POST['name']);
+// $tel = urldecode($_POST['tel']);
 
 
 // Create database 创建数据库
@@ -42,9 +42,13 @@ $tel = urldecode($_POST['tel']);
 // mysqli_close($conn);
 
 
+
+// 插入数据之前 运行这句话防止中文乱码UTF8 而不是UTF-8
+//目的是为了 你的查询输出要使用utf8的编码格式
+mysqli_query($conn,'set names UTF8');
+
 // 插入数据
 $sql = "INSERT INTO MyGuests (firstname, lastname) VALUES ('$name', '$tel')"; 
-
 if (mysqli_query($conn, $sql)) { 
     echo "New record created successfully"; 
 } else { 
