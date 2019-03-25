@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en"> 
+<head>  
+    <meta charset="UTF-8">  
+    <title>Document</title>
+    <script src="js/jquery-1.10.2.min.js"></script> 
+</head>  
+<body>  
+    <p id="innerBox">这是子窗口页面</p>
+    <script>
+      var aaa = "bbb";
+       function func2(){
+           console.log("这是子窗口返回的数据")
+       }
+     // 文档加载完毕 调用父函数
+     window.onload = function(){
+         parent.func() 
+     }
+
+    </script>  
+</body>  
+</html> 

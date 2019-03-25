@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>  
+<html lang="en" id="bd">  
+<head>  
+    <meta charset="UTF-8">  
+    <script src="js/jquery-1.10.2.min.js"></script> 
+    <title>Document</title>
+    <style>
+    body{
+     border:2px solid red;
+    }
+    </style>
+</head>  
+<body> 
+    <p id="outBox">这是父窗口页面</p> 
+    <iframe src="child.html" frameborder="1" id="childIframe"></iframe>
+    <script>
+
+     function func(){
+         console.log("这是父窗口返回的数据")
+     }
+      
+
+     // 文档加载完毕 获取子窗口及调用子函数  
+     window.onload = function(){
+     
+     var childIframe =document.getElementById('childIframe');
+     var child = childIframe.contentWindow||childIframe.contentDocument;
+     console.log(child)
+     child.func2()
+     }
+     
+
+    </script>
+</body>  
+</html> 
