@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/init.css">
+        <style>
+            p{
+                line-height:40px;
+            }
+            #box{
+                height: 120px;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body style="border:1px solid #000;">
+        <div class="box">
+            <div id="box">
+                <p>111</p>
+                <p>122</p>
+                <p>133</p>
+                <p>144</p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            //******************连续滚动*****************
+            // var area = document.getElementById('box');
+            // area.innerHTML+=area.innerHTML
+            // function scrollUp(){
+            //     area.scrollTop++;
+            //     if(area.scrollTop>area.scrollHeight/2){
+            //             area.scrollTop = 0;
+            //     }
+            // }
+            // var timer = setInterval(scrollUp,1000)
+            // area.onmouseenter = function(){
+            //    clearInterval(timer)
+            // }
+            // area.onmouseleave = function(){
+            //    timer = setInterval(scrollUp,20)
+            // }
+
+
+
+
+            //******************单条滚动*****************
+            var area = document.getElementById('box');
+            area.innerHTML+=area.innerHTML
+            var timer,timeout;
+
+            // 首次以及暂停之后的开始移动
+            function startMove(){
+                area.scrollTop++
+                timer = setInterval(scrollUp,20);
+            }
+            // 单行的向上滚动
+            function scrollUp(){
+                console.log(area.scrollTop)
+                if(area.scrollTop%40===0){
+                     clearInterval(timer)
+                     timeout = setTimeout(startMove,1000)  
+                }else{
+                    area.scrollTop++
+                    if(area.scrollTop>area.scrollHeight/2){
+                       area.scrollTop=0; 
+                    }
+                }
+            }
+            // startMove()
+
+
+           
+        </script>
+    </body>
+
+</html>

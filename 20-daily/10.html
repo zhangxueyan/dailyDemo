@@ -1,0 +1,64 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta name="viewport" content="width=device-width">
+<title></title>  
+<script src="js/jquery-1.12.4.min.js"></script>
+<style>  
+  
+.ui-select {  
+    text-align: center;  
+    /* 加border只是为了看到边框*/  
+    border:solid 1px;  
+}  
+.ui-select select {  
+    position: absolute;  
+    left: 0px;  
+    top: 0px;  
+    width: 100%;  
+    height: 3em;  
+    opacity: 0;  
+}  
+
+@media screen and (max-width:998){
+    
+}
+
+  
+</style>  
+</head>  
+<body>  
+    <div class="ui-select">  
+        <span class="spaVal" id="span1">The 1st Option</span>  
+        <select onchange="gradeChange()" id="select1">  
+            <option value="1">The 1st Option</option>  
+            <option value="2">The 2nd Option</option>  
+            <option value="3">The 3rd Option</option>  
+            <option value="4">The 4th Option</option>  
+        </select>
+    </div> 
+
+    <script>
+
+
+
+
+        function gradeChange(){
+        var span1 = document.getElementById('span1');
+
+        // 原生js 获取选中的select的value和text值
+        var select = document.getElementById('select1');
+        var idx  = select.selectedIndex;
+        // console.log(select[idx].text)
+        
+
+
+        // jquery 获取选中的select的value和text值
+        // var selVal = $("#select1 option:selected").text();
+        // console.log(selVal)
+    
+         span1.innerHTML = select[idx].text
+        }
+    </script>
+</body>  
+</html>  

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/init.css">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <script>
+        (function () {
+            setFontSize();
+            function setFontSize() {
+                var html = document.documentElement;
+                var windowWidth = html.clientWidth;
+                if (windowWidth <= 750) {
+                    html.style.fontSize = windowWidth / 7.5 + 'px';
+                } else {
+                    html.style.fontSize = '100px';
+                }
+            };
+            // window.onresize = setFontSize;
+
+            window.addEventListener('resize',setFontSize)
+        })();
+    </script>
+	<style>
+		.clearfix:after{
+			content:"";
+			display:block;
+			clear: both;
+		}
+        nav{
+        	position: relative;
+        	margin-top:20px;
+        }
+		nav a {
+			width:100px;
+			float: left;
+			font-size:0.16rem;
+			color:#000;
+			text-align:center;
+			line-height: 50px;
+			margin:0 5px;
+		}
+		nav a.active{
+			border-bottom: 2px solid red;
+		}
+		#line{
+			width:100px;
+			position: absolute;
+			
+			top:0;
+			height: 2px;
+			background:red;
+
+			transition:all 0.3s;
+		}
+		.box1{
+			width: 7.5rem;
+			border: 0.5px solid;
+			font-size:1rem;
+			display:none;
+		}
+		.box2{
+			width: 3.5rem;
+			border: 1px solid;
+			font-size:0.5rem;
+			margin-top:0.3rem;
+			display:none;
+		}
+	</style>
+</head>
+<body>
+
+	<nav class="clearfix">
+		<a href="javascript:void(0);" class="item">首页1</a>
+		<a href="javascript:void(0);" class="item">首页2</a>
+		<a href="javascript:void(0);" class="item">首页3</a>
+		<span id="line" style="left:10px"></span>
+	</nav>
+	<script>
+		// 方式一
+        //var $line = $("#line");
+		// var $item = $(".item");
+		// $item.mouseenter(function(){
+		// 	$line.animate({left:$(this).offset().left})
+		// })
+	</script>
+
+	<script>
+		var line = document.querySelector("#line");
+		var items = document.querySelectorAll(".item");
+		// for(var i=0;i<items.length;i++){
+		// 	items[i].onmouseenter = (function(i){
+		// 		return function(){
+		// 			console.log(i)
+        //             line.style.left = this.offsetLeft+'px'
+		// 		}
+		// 	})(i)
+		// }
+
+
+		for(var i=0;i<items.length;i++){
+			(function(i){
+				items[i].onmouseenter = function(){
+                   // console.log(this.offsetLeft)
+                   line.style.left = this.offsetLeft+'px'
+                   line.style.background = "green"
+				}
+			})(i)
+		}
+	</script>
+
+	<div id="wrapper" style="height:130px;
+    border: 1px solid;overflow: scroll!important;">
+	    <ul>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	        <li>aaa</li>
+	    </ul>
+	</div>
+
+<script src="js/iScroll.js"></script>
+<script type="text/javascript">
+
+
+    var myScroll1 = new iScroll('wrapper', {
+                scrollbarClass: 'myScrollbar' ,
+                // hScrollbar:false,
+                vScroll:true,
+                // hideScrollbar: false //是否隐藏滚动条  
+            });
+</script>
+</body>
+</html>

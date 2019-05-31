@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.0.0/vue.min.js"></script>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <style>
+        p{
+            font-size:14px;
+        }
+        td{
+            border:1px solid #ccc;
+        }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+    </style>
+</head>
+<body>
+<div id="app">
+   {{message}}
+
+
+   <component-a :message2="message"></component-a>
+   <button @click="update">更新</button>
+   <button @click="uninstall">卸载</button>
+
+
+    <button v-on:click="show = !show">Toggle</button>
+  <transition name="fade">
+    <p v-if="show">hello</p>
+  </transition>
+
+
+
+</div>
+
+
+<div id="test" age="24">
+    click here
+</div>
+
+<input type="week">
+<script>
+
+Vue.component("component-a",{
+    props:["message2"],
+    template:"<div v-dir>componentA内容 {{message2}}</div>",
+    data(){
+        return {
+           count:111
+        }
+    }
+})
+
+Vue.directive('dir', {
+    bind(el,binding) {
+    console.log('dir bind');
+    el.style.color = binding.value
+    },
+    inserted(el) {
+    console.log('dir inserted');
+    console.log(el.parentNode) // null
+    },
+    update: function (el) {
+     console.log(el.innerHTML) // Hello
+     console.log('dir update')
+    },
+    componentUpdated: function (el) {
+     console.log(el.innerHTML) // Hi
+     console.log('dir componentUpdated')
+    }
+});
+
+var vm = new Vue({
+    el: "#app",
+    data: {
+        message:"hello",
+        newColor :"green",
+        show: true
+    },
+    methods:{
+        update(){
+           this.message = 'Hi' 
+        },
+        uninstall: function () {
+         this.message = ''
+        }
+    }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+@charset "utf-8";
+body,div,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,code,form,fieldset,legend,button,textarea,table,tbody,tfoot,thead,th,td,article,aside,dialog,figure,footer,header,hgroup,menu,nav,section,time,mark,audio,video{margin:0;padding:0;outline:0;background:transparent;}article,aside,dialog,figure,footer,header,hgroup,nav,section{display:block;}body,button,input,select,textarea{font:12px/1.5 arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%;outline:none;font-family:inherit}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol,li{list-style:none;}img{border:none;}a{text-decoration:none;outline:thin none;}a:hover{text-decoration:underline;}table{border-collapse:collapse;border-spacing:0;}.clear{clear:both;}.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}html{-webkit-text-size-adjust: none;}
+body{font:12px/1.5 \5FAE\8F6F\96C5\9ED1,tahoma,arial,\5b8b\4f53,sans-serif;}
+
+/*弹框*/
+.tcbox{width:100%; height:100%; position:fixed; top:0; left:0; background:rgba(0,0,0,0.5); z-index:999;
+display:-webkit-box; 
+-webkit-box-orient:horizontal; 
+-webkit-box-pack:center; 
+-webkit-box-align:center; 
+display:-moz-box; 
+-moz-box-orient:horizontal; 
+-moz-box-pack:center; 
+-moz-box-align:center; 
+display:-o-box; 
+-o-box-orient:horizontal; 
+-o-box-pack:center; 
+-o-box-align:center; 
+display:-ms-box; 
+-ms-box-orient:horizontal; 
+-ms-box-pack:center; 
+-ms-box-align:center; 
+display:box; 
+box-orient:horizontal; 
+box-pack:center; 
+box-align:center;}
+
+.col-org{color:#ff6200;}
+
+.tcmain{width:78%; max-width:580px; margin:0 auto; background:#fff;border-radius:5px; position:relative; box-sizing:border-box;text-align:center;}
+.tc_close{width:19px;height:19px;background: url(../images/tc_close.png) no-repeat;background-size:200%;overflow:hidden;position:absolute;right:8px;top:8px;cursor:pointer;}
+.tc_close:hover{background-position:100% 0;}
+.tcmain h1{font-size:1.4rem;}
+.tcmain a{display:block;}
+/*滚动条*/
+#tc-wrapper1{ height: 146px; position: relative;width:84%;margin:0 auto; }
+#tc-wrapper2{ height: 146px; position: relative;width:84%;margin:0 auto; }
+/*公用按钮样式*/
+.tcmain .bottom-wrap{margin-top:10px;background-color:#f2f2f2;border-radius:0 0 5px 5px;padding:10px 0;}
+.tcmain .tc-button{display:inline-block;margin:0 auto;min-width:100px;font-size:17px;padding:8px 15px;background-color:#da2b20;color:#fff;border-radius:5px;}
+.tcmain .tc-button:hover{text-decoration:none;}
+/*分配夺宝号码*/
+.tc-content01 .top-wrap{font-size:0.75rem;color:#4d4d4d;text-align:left;padding:32px 8% 0;border-bottom:1px dotted #999;}
+.tc-content01 .top-wrap p{padding-bottom:0.5rem;}
+.tc-content01 .p-title{font-size:14px;padding-left:42px;}
+.tc-content01 .p-title.strong{padding-top:13px;}
+.tc-content01 .p-title span{color:#ff6200;}
+.tc-content01 .wish{font-size:0.75rem;color:#4d4d4d;padding:0.8rem 8% 1rem;text-align:left;}
+
+.tc-content01 .num-list{text-align:left;}
+.tc-content01 .num-list dt{font-size:0.625rem;color:#1a1a1a;padding-bottom:4px;}
+.tc-content01 .num-list dd{font-size:0.625rem;color:#808080;padding-bottom:20px;word-wrap:break-word;}
+.tc-content01 .num-list dd span{display:inline-block;white-space:nowrap;}
+/*全部号码*/
+.tc-content02 .mynum{padding:25px 0 12px;font-size:0.75rem;color:#404040;}
+.tc-content02 .num-list{text-align:left;}
+.tc-content02 .num-list dd{font-size:0.625rem;line-height:1.5rem;color:#333;padding-bottom:20px;word-wrap:break-word;}
+.tc-content02 .num-list dd span{display:inline-block;white-space:nowrap;}
+/*参与人次*/
+.tc-content03 .buytext{padding:30px 0 12px;font-size:0.8125rem;color:#404040;}
+.tc-content03 .w-number-wrap{position:relative;padding-bottom:25px;}
+.tc-content03 .w-number {
+    position: relative;
+    margin:0 auto;
+    height:45px;
+    width:88px;
+    vertical-align: middle;
+    padding:0 35px;
+}
+.tc-content03 .w-number-input {
+    float: left;
+    font-size:20px;
+    text-align: center;
+    width: 78px;
+    border: 1px solid #dadada;
+    background-color:#fafafa;
+    height: 44px;
+    line-height:44px;
+    padding: 0 4px;
+    outline: medium none;
+}
+.tc-content03 .w-number-btn {
+    color:#666;
+    border: 1px solid #E0E0E0;
+    position: absolute;
+    font-size:20px;
+    text-align: center;
+    text-decoration: none;
+    width: 34px;
+    height: 44px;    
+    line-height: 44px;
+    overflow: hidden;
+    font-weight:700;
+}
+.tc-content03 .w-number-btn:hover{color:#da2b20;text-decoration:none;}
+.tc-content03 .w-number-btn-plus {
+    right: 0px;
+    top: 0px;
+}
+.tc-content03 .w-number-btn-minus {
+    right: auto;
+    left: 0px;
+    top: 0px;
+}
+/*中奖概率*/
+.tc-content03 .m-detail-main-buyHint {
+    position: absolute;
+    left:100px;
+    top:50px;
+    font-size:0.625rem;
+    padding: 0px 8px 0px 8px;
+    display: inline-block;
+    background-color: #ffe3e3;
+    border: 1px solid #e0e0e0;
+    color: #fe7386;
+    line-height:1rem;
+    border-radius: 4px;
+}
+.tc-content03 .m-detail-main-buyHint b {
+    font-weight: normal;
+}
+.tc-content03 .m-detail-main-buyHint .ico-arrow {
+    position: absolute;
+    left: 40px;
+    top:-4px;
+    width:6px;
+    height:4px;
+    background: url(../images/tip-top.png) no-repeat center;
+    background-size:100%;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+@charset "utf-8";
+/* CSS Document */
+
+
+/**
+ *
+ * Horizontal Scrollbar
+ *
+ */
+.myScrollbarH {
+    position:absolute;
+    z-index:100;
+    height:8px;
+    bottom:1px;
+    left:2px;
+    right:7px
+}
+
+.myScrollbarH > div {
+    position:absolute;
+    z-index:100;
+    height:100%;
+
+    /* The following is probably what you want to customize */
+    background-image:-webkit-gradient(linear, 0 0, 100% 0, from(#a00), to(#f00));
+    background-image:-moz-linear-gradient(top, #f00, #900);
+    background-image:-o-linear-gradient(top, #f00, #900);
+
+    border:1px solid #900;
+    -webkit-background-clip:padding-box;
+    -moz-background-clip:padding-box;
+    -o-background-clip:padding-box;
+    background-clip:padding-box;
+    
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    box-sizing:border-box;
+    
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    -o-border-radius:4px;
+    border-radius:4px;
+    
+    -webkit-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+    -moz-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+    -o-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+    box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+}
+
+
+/**
+ *
+ * Vertical Scrollbar
+ *
+ */
+.myScrollbarV {
+    position:absolute;
+    z-index:100;
+    width:4px;bottom:7px;top:2px;right:1px;
+    background-color:#d6d6d6;
+    border-radius:4px;
+}
+
+.myScrollbarV > div {
+    position:absolute;
+    z-index:100;
+    width:100%;
+
+    /* The following is probably what you want to customize */
+    background:-webkit-gradient(linear, 0 0, 100% 0, from(#f00), to(#ff6200));
+    background-image:-moz-linear-gradient(top, #f00, #ff6200);
+    background-image:-o-linear-gradient(top, #f00, #ff6200);
+
+    border:1px solid #ff6200;
+
+    -webkit-background-clip:padding-box;
+    -moz-background-clip:padding-box;
+    -o-background-clip:padding-box;
+    background-clip:padding-box;
+    
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    box-sizing:border-box;
+    
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    -o-border-radius:4px;
+    border-radius:4px;
+    
+    -webkit-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+    -moz-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+    -o-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+    box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+}

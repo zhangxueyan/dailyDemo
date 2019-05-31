@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html manifest="demo.appcache">
+<head> 
+<meta  charset="utf-8"> 
+<title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+
+  
+   <parent-component :title="message">
+   </parent-component>
+   
+
+   <component-a>
+        <template slot-scope="props">
+            <span>hello from parent</span>
+            <span>{{ props.text }}</span>
+        </template>
+   </component-a>
+
+</div>
+
+<script>
+
+Vue.component('component-a',{
+  template:'<div><slot text="hello from child"></slot></div>'
+})
+
+
+  //root根实例像parentComponent传递数据
+  //childComponent  向上触发parentComponent的  同级触发 childComponent2
+
+var childComponent = {
+  template:'<div @click = "childEvent">这是子组件{{message}}</div>',
+  data:function(){
+    return{
+      message:'子组件msg',
+      flag:true,
+      params:'zhangxy',
+      params2:'ljialin'
+    }
+  },
+  methods:{
+    childEvent(){
+      if(this.flag){
+        this.message = "new子组件msg"
+        this.flag = false;
+      }else{
+        this.message = "子组件msg"
+        this.flag = true;
+      }
+
+       var params = this.params;
+       var params2 = this.params2;
+       this.$emit('transevent',params)
+       eventBus.$emit('transevent2',params2)
+
+    }
+  }
+}
+
+var childComponent2 = {
+  template:'<div>这是子组件2{{message}}</div>',
+  data:function(){
+    return{
+      message:'子组件2',
+    }
+  }
+}
+var parentComponent = {
+  props:['title'],
+  template:'<div>这是父组件{{title}} {{message}}<child-component @transevent = "parentEvent"></child-component>   <child-component2></child-component2></div>',
+  data:function(){
+    return{
+      message:'world',
+      count:0,
+      flag:true
+    }
+  },
+  components:{
+    childComponent,
+    childComponent2
+  },
+  methods:{
+    parentEvent(params){
+      if(this.flag){
+        this.message = params
+        this.flag = false;
+      }else{
+        this.message = "world"
+        this.flag = true;
+      }
+
+      eventBus.$on('transevent2',function(params2){
+        console.log(params2)
+      })
+
+    },
+  }
+}
+
+window.eventBus = new Vue();
+var vm = new Vue({
+    el:"#app",
+    data:{
+      message:"父组件msg"
+    },
+    components:{
+      parentComponent
+    }
+})
+</script>
+</body>
+</html>

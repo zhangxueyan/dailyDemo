@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoJSONP</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+</head>
+<body>
+<script type="text/javascript">
+    function jsonhandle(data){
+       console.log(data)
+    }
+</script>
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            type : "get",
+            async: false,
+            url : "https://zhangxueyan.github.io/private/test.txt",
+            success : function(data) {
+                jsonhandle(data)
+            }
+        });
+    });
+</script>
+</body>
+</html>
