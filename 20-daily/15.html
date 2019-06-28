@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   	<meta charset="utf-8">
+   	<title></title>
+   	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   	<style type="text/css">
+   		* {
+   			margin: 0;
+   			padding: 0;
+   			box-sizing: border-box;
+   		}
+
+   		html,
+   		body,
+   		section {
+   			width: 100%;
+   			height: 100%;
+   		}
+
+   		[v-clock] {
+   			display: none;
+   		}
+
+   		section {
+   			display: flex;
+   			flex-direction: column;
+   		}
+
+   		/* 布局组件:start */
+   		.view-warp {
+   			flex: 1;
+   			overflow: hidden;
+   			margin: auto;
+   			display: flex;
+   		}
+
+   		.view-box {
+   			overflow: auto;
+   			width: 1220px;
+   			height: 100%;
+   			display: flex;
+   			flex-wrap: wrap;
+   			align-content: flex-start;
+   			margin: 0 -10px;
+   		}
+
+   		.view-flex {
+   			padding: 10px;
+   			cursor: pointer;
+   			transition: ease .5s;
+   			transform-style: preserve-3d;
+   		}
+
+   		.view-flex:hover {
+   			transform: translateY(-10px);
+   			transition: ease .5s;
+   		}
+
+   		.view-item {
+   			height: 100%;
+   			border: 1px solid red;
+   			display: flex;
+   		}
+
+   		.view-item>span {
+   			margin: auto;
+   		}
+
+   		.view-no-data {
+   			margin: auto;
+   		}
+
+   		/* 布局组件:end */
+
+   		/* 过滤列表:start */
+   		.demo {
+   			box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+   			margin-bottom: 15px;
+   			min-height: 140px;
+   			height: auto !important;
+   			height: 140px;
+   		}
+
+   		.demo-warp {
+   			display: flex;
+   			max-width: 1200px;
+   			margin: auto;
+   			height: 100%;
+   			flex-direction: column;
+   			padding: 15px 0;
+   		}
+
+   		.demo-flex {
+   			display: flex;
+   		}
+
+   		.demo-flex:last-of-type {
+   			margin-bottom: 0;
+   		}
+
+   		.demo-title {
+   			flex-basis: 70px;
+   			margin-top: 5px;
+   		}
+
+   		.demo-content {
+   			display: flex;
+   			flex: 1;
+   		}
+
+   		.demo-tab {
+   			flex: 1;
+   			margin-right: 15px;
+   			height: 35px;
+   			overflow: hidden;
+   		}
+
+   		.demo-tab span {
+   			display: inline-block;
+   			margin: 0 5px 15px 5px;
+   			cursor: pointer;
+   			padding: 5px 10px;
+   			color: #999999;
+   		}
+
+   		.demo-more {
+   			margin-top: 5px;
+   			cursor: pointer;
+   		}
+
+   		.demo-active {
+   			background-color: #09F;
+   			color: white !important;
+   			border-radius: 3px;
+   		}
+
+   		.demo-tab span:hover {
+   			background-color: #09F;
+   			color: white;
+   			border-radius: 3px;
+   		}
+
+   		.demo-hide {
+   			min-height: 35px;
+   			height: auto !important;
+   		}
+
+   		/* 过滤列表:end */
+   	</style>
+   </head>
+   <body>
+   	<section id="view" clock>
+   		<demo-filter :get-list="filterList" @get-sel-data="getFilterSelData" @set-time="setTime"></demo-filter>
+
+   		<view-layout :view-data="viewList" width="100px" height="100px" :view-time="viewTime"></view-layout>
+   		<pre>选中的数据：{{viewList}}</pre>
+   	</section>
+      <script src="json/demo3.json"></script>
+      <script src="json/demo2.json"></script>
+   	<script type="text/javascript">
+         // 过滤筛选组件
+         Vue.component('demo-filter', {
+            template: `
+               <div class="demo">
+                  <div class="demo-warp">
+                     <div class="demo-flex" v-for="(v,k) in getList" :key="k">
+                        <span class="demo-title">{{v.title}}</span>
+                        <div class="demo-content">
+                           <div class="demo-tab" :class="isShow ? 'demo-hide' : ''">
+                              <span v-for="(val, key) in v.childer" :key="key" :class="{'demo-active': val.active}" @click="tabClick(val,key,k)">{{val.value}}</span>
+                           </div>
+                        </div>
+                        <div class="demo-more" @click="isShow = !isShow" v-if="v.childer.length >= 14">更多</div>
+                     </div>
+                  </div>
+               </div>
+            `,
+            data() {
+               return {
+                  isShow: false
+               }
+            },
+            props: {
+               getList: {
+                  type: Array,
+                  default: () => []
+               }
+            },
+            methods: {
+               tabClick(data, key, k) {
+                  // 添加 active ==> true 显示 `active样式`
+                  this.getList[k].childer.map(item => {
+                     item.active = false
+                  })
+                  this.getList[k].childer[key].active = true
+
+                  // 选中的数据
+                  let newArray = []
+                  this.getList.map(data => {
+                     data.childer.map(item => {
+                        if (item.active == true) {
+                           newArray.push(item)
+                        }
+                     })
+                  })
+                  this.$emit('get-sel-data', newArray)
+                  this.$emit('set-time', 0, 1000, true)
+               }
+            }
+         })
+         // 布局组件
+         Vue.component('view-layout', {
+            template: `<div class="view-warp">
+                  <div class="view-box" v-if="!viewTime.time">
+                     <div class="view-flex" v-for="(v,k) in viewData" :key="k">
+                        <div class="view-item">
+                           <span>{{v.title}}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="view-no-data" v-else>{{viewTime.msg}}</div>
+               </div>`,
+            props: {
+               viewData: {
+                  type: Array,
+                  default: () => []
+               },
+               viewTime: {
+                  type: Object,
+                  default: {
+                     time: true,
+                     msg: '数据加载中...'
+                  }
+               }
+            }
+         })
+         //根实例
+        var that =this;
+   		const vm = new Vue({
+   			el: '#view',
+   			data() {
+   				return {
+   					viewList: [],
+   					viewTime: {
+   						time: true,
+   						msg: '数据拼命加载中...'
+   					},
+                  viewData:[],//内容部分的数据 data2.json
+   					filterList: [],//上面标签按钮的列表
+
+   				}
+   			},
+   			created() {
+               
+                // data3.json是按钮
+               this.filterList = that.data3.list
+
+               // data2.json是view内容
+               this.viewList = that.data2.list
+
+               this.viewData = that.data2.list
+   			},
+   			mounted() {
+   				this.setTime(1000, 0, false)
+   			},
+   			methods: {
+   				getFilterSelData(data) {
+                  // 选中的按钮的数据从子组件传过来的
+                  this.viewList = this.viewData.filter(function(item){
+                     // for(var i=0;i<data.length;i++){
+                     //    if(data[i].value=="全部"){
+                     //       return item['opt'+i]!='';
+                     //    }else{
+                     //       return data[i].value==item['opt'+i]
+                     //    }
+                     //    console.log("传过来值",data[i].value)
+                     //    console.log("视图的值",item['opt'+i])
+                     // }
+
+                     if(data[0].value=="全部"){
+                        return item['opt0']!='';
+                     }else{
+                       return data[0].value==item['opt0'] 
+                     }  
+                  })
+                  this.viewList = this.viewList.filter(function(item){
+                     if(data[1].value=="全部"){
+                        return item['opt1']!='';
+                     }else{
+                       return data[1].value==item['opt1'] 
+                     }  
+                  })
+                  this.viewList = this.viewList.filter(function(item){
+                     if(data[2].value=="全部"){
+                        return item['opt2']!='';
+                     }else{
+                       return data[2].value==item['opt2'] 
+                     }  
+                  })
+   				},
+
+   				// 模拟延时显示数据视图
+   				setTime(startTime, endTime, bool) {
+   					setTimeout(() => {
+   						this.viewTime.time = bool
+   						setTimeout(() => {
+   							this.viewTime.time = false
+   						}, endTime)
+   					}, startTime)
+   				}
+   			}
+   		})
+   	</script>
+   </body>
+</html>
