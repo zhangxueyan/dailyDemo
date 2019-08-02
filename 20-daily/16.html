@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时效果</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<span id="day">1</span>天
+<span id="hour">1</span>时
+<span id="mintue">1</span>分
+<span id="second">1</span>秒
+
+		<script>
+			/*
+			功能：获取任意两个时间差
+			参数：（要求传入两个时间的对象）
+			start 开始的时间对象
+			end   结束的时间对象
+			*/
+
+			function getDiff(start, end) {
+				// 剩余多少分钟零多少秒零多少毫秒
+				var sMs = start.getTime(); //起始时间的总毫秒数
+				var eMs = end.getTime(); //结束时间的总毫秒数
+				var temp = eMs - sMs; //两个时间的总毫秒差值
+				//1s = 1000ms    
+				var ms = temp % 1000; //剩余的毫秒数
+				var totalSeconds = parseInt(temp / 1000); //转换后的总秒数
+				var ss = totalSeconds % 60; //剩余的秒数
+				var totalMinutes = parseInt(totalSeconds / 60); //总共的分钟数
+				var mm = totalMinutes % 60; //剩余的分钟
+				var totalHours = parseInt(totalMinutes / 60); //表示剩余的总小时
+				var hh = totalHours % 24; //剩余的小时
+				var totalDays = parseInt(totalHours / 24); //表示剩余的总天数
+				return {
+					ms: ms,
+					ss: ss,
+					mm: mm,
+					hh: hh,
+					totalDays: totalDays
+				};
+			}
+			var day = document.getElementById("day");
+			var hour = document.getElementById("hour");
+			var mintue = document.getElementById("mintue");
+			var second = document.getElementById("second");
+			// 设置截止日期为固定某一天
+			// var eTime = new Date("2020/1/1");
+
+			// 设置截止日期为一天后的23:59:59
+			var eTime = new Date(new Date().getTime()+1*24*60*60*1000);
+                eTime.setHours(23)
+                eTime.setMinutes(59)
+                eTime.setSeconds(59)
+                console.log(eTime)
+
+
+
+			  setInterval(function() {
+				var sTime = new Date();
+				var obj = getDiff(sTime, eTime);
+				day.innerHTML = obj.totalDays
+				hour.innerHTML = obj.hh
+				mintue.innerHTML = obj.mm
+				second.innerHTML = obj.ss
+			}, 1);
+		</script>
+
+</body>
+</html>

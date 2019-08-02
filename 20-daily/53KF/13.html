@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+    	#new_checkbtn{
+    		cursor:pointer;
+    	}
+    </style>
+</head>
+<body>
+	
+    <a href="http://tb.53kf.com/code/client/10141268/6" target="_blank">跳转</a>
+	<form class="form1 clearfix form">
+		<input type="text" class="new_checkphone" id="new_checkname" placeholder="请输入您的手机：">
+		<p id="new_checkbtn">弹窗提交获取老师测评</p>
+	</form>
+	<script>
+	    (function () {
+				var _53code = document.createElement("script");
+				_53code.src = "https://tb.53kf.com/code/code/10141268/6";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(_53code, s);
+		})();
+	</script>
+	<script type="text/javascript">
+		 var btn = document.getElementById('new_checkbtn');
+		 btn.onclick = function(){
+		 	var mobile = document.getElementById('new_checkname');
+		 	var mobile_val = mobile.value;
+		 	var check_mobile = /^1[34578]\d{9}$/;
+		 	if(!mobile_val){
+              alert("请输入手机号！");
+              return false;
+		 	}else if(!(check_mobile.test(mobile_val))){
+              alert("请输入正确的手机号！");
+              return false;
+		 	}else{
+			  alert("预约成功！");
+	          var api = $53.createApi();
+	          api.push('phone', mobile_val);
+	          mobile.value = ""
+		 	}
+		 }
+	</script>
+</body>
+</html>

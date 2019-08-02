@@ -1,0 +1,55 @@
+var data3 = {
+	"list": [{
+			"title": "分类：",
+			"childer": [{
+					"value": "全部",
+					"active": true
+				},
+				{
+					"value": "漂浮素材",
+					"active": false
+				},
+				{
+					"value": "效果元素",
+					"active": false
+				}
+			]
+		},
+		{
+			"title": "格式：",
+			"childer": [{
+					"value": "全部",
+					"active": true
+				},
+				{
+					"value": "PSD",
+					"active": false
+				},
+				{
+					"value": "AI",
+					"active": false
+				},
+				{
+					"value": "EPS",
+					"active": false
+				}
+			]
+		},
+		{
+			"title": "排序：",
+			"childer": [{
+					"value": "全部",
+					"active": true
+				},
+				{
+					"value": "昨日热门",
+					"active": false
+				},
+				{
+					"value": "最新上传",
+					"active": false
+				}
+			]
+		}
+	]
+}
