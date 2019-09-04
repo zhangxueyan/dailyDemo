@@ -30,26 +30,32 @@
         <script type="text/javascript">
 
             //******************连续滚动*****************
-            // var area = document.getElementById('box');
-            // area.innerHTML+=area.innerHTML
-            // function scrollUp(){
-            //     area.scrollTop++;
-            //     if(area.scrollTop>area.scrollHeight/2){
-            //             area.scrollTop = 0;
-            //     }
-            // }
-            // var timer = setInterval(scrollUp,1000)
-            // area.onmouseenter = function(){
-            //    clearInterval(timer)
-            // }
-            // area.onmouseleave = function(){
-            //    timer = setInterval(scrollUp,20)
-            // }
+            function fun1(){
+            var area = document.getElementById('box');
+            area.innerHTML+=area.innerHTML
+            function scrollUp(){
+                area.scrollTop++;
+                if(area.scrollTop>area.scrollHeight/2){
+                        area.scrollTop = 0;
+                }
+            }
+            var timer = setInterval(scrollUp,1000)
+            area.onmouseenter = function(){
+               clearInterval(timer)
+            }
+            area.onmouseleave = function(){
+               timer = setInterval(scrollUp,20)
+            }
+            }
+
+            // fun1()
 
 
 
 
             //******************单条滚动*****************
+
+            function fun2(){
             var area = document.getElementById('box');
             area.innerHTML+=area.innerHTML
             var timer,timeout;
@@ -72,7 +78,11 @@
                     }
                 }
             }
-            // startMove()
+            startMove()
+
+            }
+            fun2()
+
 
 
            

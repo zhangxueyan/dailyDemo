@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		#box{
+			width:800px;
+			height: 40px;
+			line-height: 40px;
+			overflow: hidden;
+		}
+		.item{float:left;overflow:hidden;line-height: 40px;text-overflow: ellipsis;white-space: nowrap;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		 <div class="wrap">
+		 	<p class="item">2019年上海市成人高校招生9月5日开始,考生于9月5日上午9:00至九月九日上午11:00点期间登录上海市教育考试院,按要求在网上输入基本信息,填报“意向志愿”和签署《考生诚信考试承诺书》等,之后需到现场进行信息核对,现场信息核对考生类型分为…</p>
+		 	<p class="item">2019年上海市成人高校招生9月5日开始,考生于9月5日上午9:00至九月九日上午11:00点期间登录上海市教育考试院,按要求在网上输入基本信息,填报“意向志愿”和签署《考生诚信考试承诺书》等,之后需到现场进行信息核对,现场信息核对考生类型分为…</p>
+		 </div>
+	</div>
+
+	<script>
+         function fun1(){
+            var area = document.getElementById('box');
+            area.innerHTML+=area.innerHTML
+            function rollLeft(){
+                if(area.scrollLeft>area.offsetWidth){
+                        area.scrollLeft = 0
+                }else{
+                	area.scrollLeft++
+                }
+                console.log(area.offsetWidth)
+            }
+            var timer = setInterval(rollLeft,20)
+            area.onmouseenter = function(){
+               clearInterval(timer)
+            }
+            area.onmouseleave = function(){
+               timer = setInterval(rollLeft,20)
+            }
+            }
+            fun1()
+
+
+	</script>
+</body>
+</html>
